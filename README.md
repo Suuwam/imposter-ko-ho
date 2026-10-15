@@ -1,6 +1,6 @@
 # Imposter Ko Ho? 🕵️ (इम्पोस्टर को हो?)
 
-Pass-and-play Nepali imposter party game for Android — Rajesh Hamal & Nepali memes, day-to-day words, traditional stuff, and places. Romanized Nepali + नेपाली (toggle on home screen).
+Pass-and-play Nepali imposter party game for Android — 300+ words across 11 categories: meme dialogues, celebs & YouTubers, Gen Z & internet (Nepo Kids, Discord PM…), neta & chunab, films & serials, music, food, Nepali jindagi, traditional, sports, places. Undercover mode + dares for the loser. Romanized Nepali + नेपाली (toggle on home screen).
 
 **Download:** [imposter-ko-ho.apk](../../releases/latest/download/imposter-ko-ho.apk) (Android 8+, allow "install unknown apps").
 

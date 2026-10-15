@@ -53,6 +53,7 @@ h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:upper
 .dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
 .dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
 .dots span.on{background:var(--red)}
+.seg-b{background:#22264a;border:1px solid var(--line);color:var(--txt);border-radius:99px;padding:6px 14px;font:inherit;font-weight:700;font-size:14px}
 .err{color:var(--gold);text-align:center;font-weight:700;min-height:1em;margin:0}
 </style>
 </head>
@@ -61,31 +62,97 @@ h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:upper
 <script>
 // [romanized, devanagari]
 const CATS = {
-  meme: {i:'😎', n:['Meme ra Celeb','मिम र सेलेब'], w:[
-    ['Rajesh Hamal','राजेश हमाल'],['Mahanayak','महानायक'],['Dhurmus','धुर्मुस'],['Suntali','सुन्तली'],
-    ['Madan Krishna','मदनकृष्ण'],['Hari Bansha','हरिवंश'],['Balen','बालेन'],['Paras Khadka','पारस खड्का'],
-    ['Rohit Paudel','रोहित पौडेल'],['Nikhil Upreti','निखिल उप्रेती'],['Bhuwan KC','भुवन केसी'],['Priyanka Karki','प्रियंका कार्की'],
-    ['Dayahang Rai','दयाहाङ राई'],['Wilson Bikram','विल्सन बिक्रम'],['Magne Buda','मग्ने बुढा'],['Bipul Chettri','बिपुल क्षेत्री'],
-    ['Sushant KC','सुशान्त केसी'],['Yama Buddha','यम बुद्ध'],['VTEN','भिटेन'],['Gajab Chha Baje','गजब छ बाजे'],
-    ['Ke Garne Ta','के गर्ने त'],['Babal','बबाल'],['Chhya!','छ्या!'],['Hait!','हैट!'],['Lau Na Ni','लौ न नि'],['Oho Daju','ओहो दाजु']]},
-  daily: {i:'🍵', n:['Dainik Jiwan','दैनिक जीवन'], w:[
-    ['Chiya','चिया'],['Momo','मोमो'],['Dal Bhat','दाल भात'],['Chowmein','चाउमिन'],['Panipuri','पानीपुरी'],['Wai Wai','वाइ वाइ'],
-    ['Laphing','लाफिङ'],['Chatpate','चटपटे'],['Gundruk','गुन्द्रुक'],['Dhindo','ढिंडो'],['Achar','अचार'],['Lassi','लस्सी'],
-    ['Tempo','टेम्पो'],['Micro','माइक्रो'],['Conductor Dai','कन्डक्टर दाइ'],['Pathao','पठाओ'],['Load Shedding','लोडसेडिङ'],
-    ['Traffic Jam','ट्राफिक जाम'],['Gas Cylinder','ग्यास सिलिन्डर'],['Pressure Cooker','प्रेसर कुकर'],['Chappal','चप्पल'],
-    ['Dhara','धारा'],['Pasal','पसल'],['Khaja','खाजा'],['Bhauju','भाउजू'],['Sasurali','ससुराली'],['eSewa','इसेवा'],['Tarkari Bazaar','तरकारी बजार']]},
+  meme: {i:'😂', n:['Meme Dialogue','मिम डायलग'], w:[
+    ['Shankar Hu Ma Shankar','शंकर हुँ म शंकर'],['Gajab Chha Baje','गजब छ बाजे'],['Ke Garne Ta','के गर्ने त'],['Babal','बबाल'],
+    ['Chhya!','छ्या!'],['Hait!','हैट!'],['Lau Na Ni','लौ न नि'],['Oho Daju','ओहो दाजु'],['Ambani ko Aulad','अम्बानीको औलाद'],
+    ['Aura -9999','अउरा -९९९९'],['Jhyau Lagyo','झ्याउ लाग्यो'],['Kya Majja','क्या मज्जा'],['Aaile Aauchhu','अहिले आउँछु'],
+    ['Nepali Time','नेपाली टाइम'],['Ekchhin Hai','एकछिन है'],['Bhai Kati Ho?','भाइ कति हो?'],['Dai Milaidinu Na','दाइ मिलाइदिनु न'],
+    ['Khana Khanu Bhayo?','खाना खानुभयो?'],['Padhai Kasto Chha?','पढाइ कस्तो छ?'],['Bihe Kahile?','बिहे कहिले?'],
+    ['Mamu le Kutchhin','मामुले कुट्छिन्'],['Wifi ko Password?','वाइफाइको पासवर्ड?'],['Paisa Chhaina','पैसा छैन'],
+    ['Tension Nalinu','टेन्सन नलिनु'],['Pheri Bhetaula','फेरि भेटौँला'],['Chuna Laga Diya','चुना लगा दिया'],
+    ['Ko Ho Yo Sexy Keta','को हो यो सेक्सी केटा'],['Sab Thik Chha','सब ठिक छ'],['Hajur Ko Sanchai?','हजुरको सन्चै?'],
+    ['Thug Life Nepal','ठग लाइफ नेपाल'],['Nepali Babu','नेपाली बाबु']]},
+  celeb: {i:'😎', n:['Celeb ra Star','सेलेब र स्टार'], w:[
+    ['Rajesh Hamal','राजेश हमाल'],['Mahanayak','महानायक'],['Dhurmus','धुर्मुस'],['Suntali','सुन्तली'],['Madan Krishna','मदनकृष्ण'],
+    ['Hari Bansha','हरिवंश'],['Magne Buda','मग्ने बुढा'],['Balchhi Dhurbe','बल्छी धुर्बे'],['Rate Kaila','रते काइँला'],
+    ['Priyanka Karki','प्रियंका कार्की'],['Swastima Khadka','स्वस्तिमा खड्का'],['Rekha Thapa','रेखा थापा'],['Nikhil Upreti','निखिल उप्रेती'],
+    ['Bhuwan KC','भुवन केसी'],['Dayahang Rai','दयाहाङ राई'],['Saugat Malla','सौगात मल्ल'],['Wilson Bikram','विल्सन बिक्रम'],
+    ['Anmol KC','अनमोल केसी'],['Paul Shah','पल शाह'],['Barsha Raut','बर्षा राउत'],['Keki Adhikari','केकी अधिकारी'],
+    ['Bipin Karki','बिपिन कार्की'],['Sushant Pradhan','सुशान्त प्रधान'],['Sisan Baniya','सिसन बनिया'],['Ganesh GD','गणेश जीडी'],
+    ['BT Kancha','बीटी कान्छा'],['Biki Roaster','बिकी रोस्टर'],['Aayush Abhay','आयुष अभय'],['Sukumaya','सुकुमाया'],['Zunu Y','जुनु वाई']]},
+  genz: {i:'📱', n:['Gen Z ra Internet','जेन जी र इन्टरनेट'], w:[
+    ['Nepo Kids','नेपो किड्स'],['Gen Z Andolan','जेन जी आन्दोलन'],['Discord','डिस्कर्ड'],['Discord ma PM','डिस्कर्डमा पीएम'],
+    ['Social Media Ban','सोसल मिडिया ब्यान'],['One Piece Jhanda','वान पिस झन्डा'],['VPN','भीपीएन'],['Bitchat','बिटच्याट'],
+    ['TikTok','टिकटक'],['Reels','रिल्स'],['Live Aaunu','लाइभ आउनु'],['Seen Garera Chhodnu','सिन गरेर छोड्नु'],['Blue Tick','ब्लु टिक'],
+    ['Rizz','रिज'],['Brain Rot','ब्रेन रट'],['Sigma','सिग्मा'],['NPC','एनपीसी'],['Delulu','डेलुलु'],['Crush','क्रस'],
+    ['Situationship','सिचुएसनसिप'],['Hashtag','ह्यासट्याग'],['Viral Video','भाइरल भिडियो'],['Free Fire','फ्री फायर'],['PUBG','पबजी'],
+    ['Ludo King','लुडो किङ'],['Online Class','अनलाइन क्लास'],['Story Halnu','स्टोरी हाल्नु'],['Netflix Documentary','नेटफ्लिक्स डकुमेन्ट्री'],
+    ['Balen ko Chasma','बालेनको चस्मा'],['Rap Battle','र्‍याप ब्याटल']]},
+  neta: {i:'🗳️', n:['Neta ra Chunab','नेता र चुनाव'], w:[
+    ['Balen Shah','बालेन शाह'],['Harka Sampang','हर्क साम्पाङ'],['Rabi Lamichhane','रवि लामिछाने'],['Sushila Karki','सुशीला कार्की'],
+    ['KP Oli','केपी ओली'],['Prachanda','प्रचण्ड'],['Sher Bahadur Deuba','शेरबहादुर देउवा'],['Rishi Dhamala','ऋषि धमला'],
+    ['Chunab','चुनाव'],['Bhashan','भाषण'],['Ghosana Patra','घोषणापत्र'],['Singha Durbar','सिंहदरबार'],['Sansad','संसद'],
+    ['Andolan','आन्दोलन'],['Bandh','बन्द'],['Chakka Jam','चक्काजाम'],['Bhrastachar','भ्रष्टाचार'],['Mantri ko Gaadi','मन्त्रीको गाडी'],
+    ['Pajero','पजेरो'],['Bhot Halnu','भोट हाल्नु']]},
+  film: {i:'🎬', n:['Film ra Serial','फिल्म र सिरियल'], w:[
+    ['Kabaddi','कबड्डी'],['Chhakka Panja','छक्का पन्जा'],['Jatra','जात्रा'],['Loot','लुट'],['Haku Kale','हाकु काले'],
+    ['Pashupati Prasad','पशुपति प्रसाद'],['Kusume Rumal','कुसुमे रुमाल'],['Chino','चिनो'],['Deuta','देउता'],['Prem Geet','प्रेम गीत'],
+    ['Mahajatra','महाजात्रा'],['Jire Khursani','जिरे खुर्सानी'],['Meri Bassai','मेरी बास्सै'],['Halka Ramailo','हल्का रमाइलो'],
+    ['Bhadragol','भद्रगोल'],['Ulto Sulto','उल्टो सुल्टो'],['Tito Satya','तितो सत्य'],['Mundre ko Comedy Club','मुन्द्रेको कमेडी क्लब'],
+    ['Comedy Champion','कमेडी च्याम्पियन'],['Nepal Idol','नेपाल आइडल'],['Hasyabyangya','हास्यव्यङ्ग्य'],['Kollywood','कलिउड'],
+    ['Gopi','गोपी'],['Bulbul','बुलबुल'],['Saili','सैली']]},
+  music: {i:'🎵', n:['Gana Bajana','गाना बजाना'], w:[
+    ['Resham Firiri','रेशम फिरिरि'],['Sayaun Thunga Phulka','सयौँ थुँगा फूलका'],['Narayan Gopal','नारायण गोपाल'],['Aruna Lama','अरुणा लामा'],
+    ['Bipul Chettri','बिपुल क्षेत्री'],['Sajjan Raj Vaidya','सज्जनराज वैद्य'],['Swoopna Suman','स्वप्न सुमन'],['1974 AD','१९७४ एडी'],
+    ['Nepathya','नेपथ्य'],['Kutumba','कुटुम्ब'],['Yama Buddha','यम बुद्ध'],['VTEN','भिटेन'],['Laure','लाउरे'],['Sacar','सकार'],
+    ['Uniq Poet','युनिक पोएट'],['Trishna Gurung','तृष्णा गुरुङ'],['Anjana Baraili','अञ्जना बराइली'],['Melina Rai','मेलिना राई'],
+    ['Pramod Kharel','प्रमोद खरेल'],['Lok Dohori','लोक दोहोरी'],['Teej Geet','तीज गीत'],['Raw Barz','रअ बार्ज'],['Madal','मादल'],['Sarangi','सारङ्गी']]},
+  food: {i:'🥟', n:['Khana Kura','खानेकुरा'], w:[
+    ['Momo','मोमो'],['Jhol Momo','झोल मोमो'],['C-Momo','सी मोमो'],['Buff Momo','बफ मोमो'],['Dal Bhat','दाल भात'],['Chowmein','चाउमिन'],
+    ['Panipuri','पानीपुरी'],['Chatpate','चटपटे'],['Laphing','लाफिङ'],['Wai Wai','वाइ वाइ'],['Rara Noodles','रारा चाउचाउ'],['Chiya','चिया'],
+    ['Sel Roti','सेलरोटी'],['Yomari','योमरी'],['Chatamari','चटामरी'],['Bara','बारा'],['Choila','छोइला'],['Sukuti','सुकुटी'],
+    ['Sekuwa','सेकुवा'],['Thakali Khana','थकाली खाना'],['Dhindo','ढिंडो'],['Gundruk','गुन्द्रुक'],['Kinema','किनेमा'],['Aloo Tama','आलु तामा'],
+    ['Bhatmas Sadeko','भटमास सादेको'],['Aloo Sadeko','आलु सादेको'],['Thukpa','थुक्पा'],['Samosa','समोसा'],['Jeri Swari','जेरी स्वारी'],
+    ['Lassi','लस्सी'],['Juju Dhau','जुजु धौ'],['Kwati','क्वाँटी'],['Achar','अचार'],['Makai Bhatmas','मकै भटमास']]},
+  life: {i:'🛵', n:['Nepali Jindagi','नेपाली जिन्दगी'], w:[
+    ['Tempo','टेम्पो'],['Micro','माइक्रो'],['Conductor Dai','कन्डक्टर दाइ'],['Pathao','पठाओ'],['inDrive','इनड्राइभ'],['Load Shedding','लोडसेडिङ'],
+    ['Traffic Jam','ट्राफिक जाम'],['Gas Cylinder','ग्यास सिलिन्डर'],['Petrol ko Line','पेट्रोलको लाइन'],['Pressure Cooker','प्रेसर कुकर'],
+    ['Chappal','चप्पल'],['Dhara','धारा'],['Kirana Pasal','किराना पसल'],['Udhaaro','उधारो'],['Bhauju','भाउजू'],['Sasurali','ससुराली'],
+    ['Relative ko Prashna','आफन्तको प्रश्न'],['eSewa','इसेवा'],['Khalti','खल्ती'],['Lok Sewa','लोकसेवा'],['SEE Result','एसईई रिजल्ट'],
+    ['IELTS','आइईएलटीएस'],['Australia PR','अस्ट्रेलिया पीआर'],['Korea EPS','कोरिया ईपीएस'],['Qatar Malaysia','कतार मलेसिया'],
+    ['Japan ko Visa','जापानको भिसा'],['Sarkari Office','सरकारी अफिस'],['Malpot','मालपोत'],['Buspark','बसपार्क'],['Khaldo Sadak','खाल्डो सडक'],
+    ['Dhulo','धुलो'],['Tution Class','ट्युसन क्लास']]},
   trad: {i:'🪔', n:['Paramparagat','परम्परागत'], w:[
-    ['Dashain','दशैं'],['Tihar','तिहार'],['Teej','तीज'],['Chhath','छठ'],['Holi','होली'],['Gai Jatra','गाईजात्रा'],
-    ['Indra Jatra','इन्द्रजात्रा'],['Bisket Jatra','बिस्केट जात्रा'],['Lhosar','ल्होसार'],['Sel Roti','सेलरोटी'],['Yomari','योमरी'],
-    ['Juju Dhau','जुजु धौ'],['Daura Suruwal','दौरा सुरुवाल'],['Dhaka Topi','ढाका टोपी'],['Gunyu Cholo','गुन्यु चोलो'],['Khukuri','खुकुरी'],
-    ['Madal','मादल'],['Sarangi','सारङ्गी'],['Lakhe','लाखे'],['Ping','पिङ'],['Changa','चङ्गा'],['Tika','टीका'],['Jamara','जमरा'],
-    ['Deusi Bhailo','देउसी भैलो'],['Doko','डोको'],['Namlo','नाम्लो'],['Panche Baja','पञ्चे बाजा'],['Bratabandha','व्रतबन्ध'],['Pasni','पास्नी']]},
+    ['Dashain','दशैं'],['Tihar','तिहार'],['Teej','तीज'],['Chhath','छठ'],['Holi','होली'],['Gai Jatra','गाईजात्रा'],['Indra Jatra','इन्द्रजात्रा'],
+    ['Bisket Jatra','बिस्केट जात्रा'],['Lhosar','ल्होसार'],['Maghe Sankranti','माघे संक्रान्ति'],['Janai Purnima','जनै पूर्णिमा'],
+    ['Daura Suruwal','दौरा सुरुवाल'],['Dhaka Topi','ढाका टोपी'],['Gunyu Cholo','गुन्यु चोलो'],['Khukuri','खुकुरी'],['Lakhe','लाखे'],
+    ['Ping','पिङ'],['Changa','चङ्गा'],['Tika','टीका'],['Jamara','जमरा'],['Deusi Bhailo','देउसी भैलो'],['Kukur Tihar','कुकुर तिहार'],
+    ['Bhai Tika','भाइटीका'],['Doko','डोको'],['Namlo','नाम्लो'],['Panche Baja','पञ्चे बाजा'],['Bratabandha','व्रतबन्ध'],['Pasni','पास्नी'],
+    ['Dakshina','दक्षिणा'],['Mandir ko Ghanti','मन्दिरको घण्टी'],['Tongba','तोङ्बा']]},
+  sport: {i:'🏏', n:['Khel Kud','खेलकुद'], w:[
+    ['Paras Khadka','पारस खड्का'],['Rohit Paudel','रोहित पौडेल'],['Dipendra Airee','दीपेन्द्र ऐरी'],['Kushal Bhurtel','कुशल भुर्तेल'],
+    ['Karan KC','करण केसी'],['Sompal Kami','सोमपाल कामी'],['Kirtipur Ground','कीर्तिपुर मैदान'],['Dasharath Stadium','दशरथ रंगशाला'],
+    ['Nepal Premier League','नेपाल प्रिमियर लिग'],['Cricket','क्रिकेट'],['Football','फुटबल'],['Volleyball','भलिबल'],['Dandi Biyo','डन्डी बियो'],
+    ['Bagh Chal','बाघचाल'],['Carrom Board','क्यारम बोर्ड'],['Lukamari','लुकामारी'],['Chungi','चुङ्गी'],['Gatti','गट्टी'],['Kabaddi','कबड्डी'],
+    ['Marathon','म्याराथन']]},
   place: {i:'🏔️', n:['Thau','ठाउँ'], w:[
-    ['Pashupatinath','पशुपतिनाथ'],['Swayambhu','स्वयम्भू'],['Boudha','बौद्ध'],['Dharahara','धरहरा'],['Pokhara','पोखरा'],
-    ['Phewa Tal','फेवा ताल'],['Lumbini','लुम्बिनी'],['Sagarmatha','सगरमाथा'],['Chitwan','चितवन'],['Janakpur','जनकपुर'],
-    ['Thamel','ठमेल'],['Ratna Park','रत्नपार्क'],['Bhaktapur','भक्तपुर'],['Rara Tal','रारा ताल'],['Mustang','मुस्ताङ'],
-    ['Nagarkot','नगरकोट'],['Ilam','इलाम'],['Bandipur','बन्दीपुर'],['Kalanki','कलंकी'],['Gongabu Buspark','गोंगबु बसपार्क']]}
+    ['Pashupatinath','पशुपतिनाथ'],['Swayambhu','स्वयम्भू'],['Boudha','बौद्ध'],['Dharahara','धरहरा'],['Pokhara','पोखरा'],['Phewa Tal','फेवा ताल'],
+    ['Lumbini','लुम्बिनी'],['Sagarmatha','सगरमाथा'],['Chitwan','चितवन'],['Janakpur','जनकपुर'],['Thamel','ठमेल'],['Ratna Park','रत्नपार्क'],
+    ['Bhaktapur','भक्तपुर'],['Rara Tal','रारा ताल'],['Mustang','मुस्ताङ'],['Nagarkot','नगरकोट'],['Ilam','इलाम'],['Bandipur','बन्दीपुर'],
+    ['Kalanki','कलंकी'],['Gongabu Buspark','गोंगबु बसपार्क'],['Basantapur','बसन्तपुर'],['Durbar Marg','दरबारमार्ग'],['Jhapa','झापा'],
+    ['Dharan','धरान'],['Butwal','बुटवल'],['Birgunj','वीरगञ्ज'],['Tribhuvan Airport','त्रिभुवन विमानस्थल'],['Kalinchowk','कालिञ्चोक']]}
 };
+const DARES = [
+  ['Rajesh Hamal ko style ma "Shankar hu ma Shankar" bhana','राजेश हमालको स्टाइलमा "शंकर हुँ म शंकर" भन'],
+  ['Ek line Lok Dohori gau','एक लाइन लोक दोहोरी गाऊ'],['Conductor Dai jasto "Kalanki Kalanki!" chicha','कन्डक्टर दाइ जस्तै "कलंकी कलंकी!" चिच्याऊ'],
+  ['Resham Firiri ma 10 second nacha','रेशम फिरिरिमा १० सेकेन्ड नाच'],['Aafno crush ko naam ko first letter bhana','आफ्नो क्रसको नामको पहिलो अक्षर भन'],
+  ['Mamu le gali gareko nakkal gara','मामुले गाली गरेको नक्कल गर'],['Balen jasto chasma lagaera 5 second pose deu','बालेन जस्तै चस्मा लगाएर ५ सेकेन्ड पोज देऊ'],
+  ['Neta jasto 15 second bhashan deu','नेता जस्तै १५ सेकेन्ड भाषण देऊ'],['Aafno last search history bhana','आफ्नो पछिल्लो सर्च हिस्ट्री भन'],
+  ['TikTok trend ko dance gara','टिकटक ट्रेन्डको डान्स गर'],['Sabai lai ek ek "Gajab chha baje" bhana','सबैलाई एक एक "गजब छ बाजे" भन'],
+  ['Relative jasto "Padhai kasto chha? Bihe kahile?" sodha','आफन्त जस्तै "पढाइ कस्तो छ? बिहे कहिले?" सोध'],
+  ['Momo order garne jasto mime gara','मोमो अर्डर गर्ने जस्तो अभिनय गर'],['Next round pani timi le nai suru gara','अर्को राउन्ड पनि तिमीले नै सुरु गर'],
+  ['Dhurmus ko awaj ma bola','धुर्मुसको आवाजमा बोल'],['Aafno aura score bhana ra justify gara','आफ्नो अउरा स्कोर भन र प्रमाणित गर']
+];
 const T = {
   title:['Imposter <span>Ko Ho?</span>','इम्पोस्टर <span>को हो?</span>'],
   tag:['Sathi haru sanga khela, imposter lai chin!','साथीहरूसँग खेल, इम्पोस्टरलाई चिन!'],
@@ -100,10 +167,13 @@ const T = {
   help:['Palo palo shabda ko bare ek kura bhana. Imposter lai chin!','पालैपालो शब्दबारे एउटा कुरा भन। इम्पोस्टरलाई चिन!'],
   up:['Samaya sakiyo! Vote gara 🗳️','समय सकियो! भोट गर 🗳️'], vote:['Vote bhayo, Imposter Dekhau','भोट भयो, इम्पोस्टर देखाऊ'],
   was:['Imposter thiyo','इम्पोस्टर थियो'], word:['Shabda thiyo','शब्द थियो'],
+  under:['Undercover mode (imposter lai arkai shabda)','अन्डरकभर मोड (इम्पोस्टरलाई अर्कै शब्द)'], all:['Sabai','सबै'],
+  dare:['Haarne lai sajaya','हार्नेलाई सजाय'],
   again:['Feri Khela','फेरि खेल'], home:['Suru ma Ja','सुरुमा जाऊ'], quit:['Khel chhodne?','खेल छोड्ने?']
 };
 const store = { get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
-const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:['meme','daily','trad','place'],names:[],hint:true}, store.get('cfg',{}));
+const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[],hint:true,under:false}, store.get('cfg',{}));
+S.cats = S.cats.filter(k => CATS[k]);
 let G = null, tick = null;
 const app = document.getElementById('app');
 const t = (k,n) => T[k][S.lang].replace('{n}', n);
@@ -127,8 +197,9 @@ function home(err=''){
     <div class="row">${t('imps')}<div class="step"><button data-s="imp,-1">−</button><b>${S.imp}</b><button data-s="imp,1">+</button></div></div>
     <div class="row">${t('time')}<div class="step"><button data-s="time,-1">−</button><b>${S.time}</b><button data-s="time,1">+</button></div></div>
     <label class="tog">${t('hint')}<input type="checkbox" id="hint" ${S.hint?'checked':''}></label>
+    <label class="tog">${t('under')}<input type="checkbox" id="under" ${S.under?'checked':''}></label>
   </div>
-  <h2>${t('cats')}</h2>
+  <div class="row"><h2>${t('cats')}</h2><button class="seg-b" id="all">${t('all')} ✓</button></div>
   <div class="chips">${Object.entries(CATS).map(([k,c])=>`<button class="chip ${S.cats.includes(k)?'on':''}" data-c="${k}"><i>${c.i}</i>${L(c.n)}</button>`).join('')}</div>
   <h2>${t('names')}</h2>
   <div class="names">${Array.from({length:S.n},(_,i)=>`<input data-i="${i}" maxlength="14" placeholder="${t('p')} ${i+1}" value="${esc(S.names[i]||'')}">`).join('')}</div>
@@ -144,18 +215,24 @@ function home(err=''){
   });
   app.querySelectorAll('[data-i]').forEach(inp=>inp.oninput=()=>{S.names[+inp.dataset.i]=inp.value;save()});
   document.getElementById('hint').onchange=e=>{S.hint=e.target.checked;save()};
+  document.getElementById('under').onchange=e=>{S.under=e.target.checked;save()};
+  document.getElementById('all').onclick=()=>{S.cats=S.cats.length===Object.keys(CATS).length?[]:Object.keys(CATS);save();home()};
   document.getElementById('go').onclick=()=>S.cats.length?newRound():home(t('pick'));
 }
 
 function newRound(){
   const ck = S.cats[rnd(S.cats.length)], cat = CATS[ck];
   const imps = new Set(); while(imps.size<S.imp) imps.add(rnd(S.n));
-  G = {cat, word:cat.w[rnd(cat.w.length)], imps, i:0, first:rnd(S.n)};
+  const used = store.get('used', []).filter(w => cat.w.some(x => x[0]===w));
+  let pool = cat.w.filter(x => !used.includes(x[0])); if (!pool.length) { pool = cat.w; used.length = 0; }
+  const word = pool[rnd(pool.length)]; used.push(word[0]); store.set('used', used.slice(-200));
+  const rest = cat.w.filter(x => x !== word);
+  G = {cat, word, decoy: S.under ? rest[rnd(rest.length)] : null, imps, i:0, first:rnd(S.n)};
   reveal();
 }
 
 function reveal(){
-  const i = G.i, isImp = G.imps.has(i), last = i===S.n-1;
+  const i = G.i, last = i===S.n-1, isImp = G.imps.has(i) && !G.decoy, w = G.imps.has(i) && G.decoy ? G.decoy : G.word;
   app.innerHTML = `
   <div class="dots">${Array.from({length:S.n},(_,k)=>`<span class="${k<=i?'on':''}"></span>`).join('')}</div>
   <div class="grow">
@@ -164,7 +241,7 @@ function reveal(){
       <div class="face front"><div class="q">❓</div><b style="font-size:22px">${t('tap')}</b><span class="sub">${t('only')}</span></div>
       <div class="face back ${isImp?'imp':''}">${isImp
         ? `<div style="font-size:70px">🕵️</div><div class="word">${t('you')}</div>${S.hint?`<span class="pill">${t('cat')}: ${G.cat.i} ${L(G.cat.n)}</span>`:''}<span class="sub">${t('blend')}</span>`
-        : `<h2>${t('your')}</h2><div class="word">${L(G.word)}<small>${other(G.word)}</small></div><span class="pill">${G.cat.i} ${L(G.cat.n)}</span>`}
+        : `<h2>${t('your')}</h2><div class="word">${L(w)}<small>${other(w)}</small></div><span class="pill">${G.cat.i} ${L(G.cat.n)}</span>`}
       </div>
     </div></div>
     <button class="btn alt" id="nx" style="visibility:hidden">${last?t('done'):t('next')}</button>
@@ -201,7 +278,9 @@ function result(){
     <div>${[...G.imps].map(i=>`<span class="pill r" style="font-size:22px">${esc(nameOf(i))}</span>`).join('')}</div>
     <h2>${t('word')}</h2>
     <div class="word">${L(G.word)}<small>${other(G.word)}</small></div>
+    ${G.decoy?`<span class="sub">Imposter: ${L(G.decoy)} / ${other(G.decoy)}</span>`:''}
     <span class="pill">${G.cat.i} ${L(G.cat.n)}</span>
+    <div class="box" style="width:100%"><h2>🔥 ${t('dare')}</h2><b style="font-size:18px">${L(DARES[rnd(DARES.length)])}</b></div>
   </div>
   <button class="btn" id="ag">${t('again')} 🔁</button>
   <button class="btn ghost" id="hm">${t('home')}</button>`;
