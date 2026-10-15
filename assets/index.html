@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ne">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Imposter Ko Ho?</title>
+<style>
+:root{--bg:#0d0f1f;--card:#181b33;--line:#2a2e52;--red:#dc143c;--blue:#2d5bd8;--txt:#f3f4ff;--mut:#9aa0c7;--gold:#ffc83d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font-family:system-ui,"Noto Sans Devanagari",sans-serif}
+#app{min-height:100%;max-width:520px;margin:0 auto;padding:20px 16px 28px;display:flex;flex-direction:column;gap:16px}
+h1{margin:4px 0 0;font-size:34px;line-height:1.1;text-align:center}
+h1 span{color:var(--red)}
+h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.sub{text-align:center;color:var(--mut);margin:0}
+.top{display:flex;justify-content:flex-end}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px}
+.seg button{background:none;border:0;color:var(--mut);padding:8px 14px;border-radius:99px;font:inherit;font-weight:700}
+.seg button.on{background:var(--red);color:#fff}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:17px;font-weight:600}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:#22264a;color:var(--txt);font-size:22px;font-weight:700}
+.step b{min-width:34px;text-align:center;font-size:22px}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chip{border:2px solid var(--line);background:#1f2343;color:var(--txt);border-radius:14px;padding:14px 10px;font:inherit;font-weight:700;font-size:15px;text-align:left}
+.chip i{display:block;font-style:normal;font-size:26px;margin-bottom:4px}
+.chip.on{border-color:var(--red);background:#3a1426}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.names input{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:#11132a;color:var(--txt);font:inherit;font-size:15px;user-select:text}
+.tog{display:flex;align-items:center;justify-content:space-between;font-weight:600}
+.tog input{width:24px;height:24px;accent-color:var(--red)}
+.btn{border:0;border-radius:16px;padding:18px;font:inherit;font-size:19px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--red),#a3102f);box-shadow:0 6px 0 #6d0b20;width:100%}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #6d0b20}
+.btn.alt{background:linear-gradient(135deg,var(--blue),#1d3c99);box-shadow:0 6px 0 #142a6b}
+.btn.ghost{background:none;box-shadow:none;border:1px solid var(--line);color:var(--mut);font-size:16px;padding:14px}
+.grow{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
+.big{font-size:28px;font-weight:800;margin:0}
+.flip{width:100%;perspective:1000px;height:340px}
+.flip>div{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.open>div{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;border:2px solid var(--line)}
+.front{background:repeating-linear-gradient(45deg,#1b1f3d,#1b1f3d 14px,#20244a 14px,#20244a 28px)}
+.front .q{font-size:90px}
+.back{transform:rotateY(180deg);background:var(--card)}
+.back.imp{background:radial-gradient(circle at 50% 30%,#5a0d22,#20091a);border-color:var(--red)}
+.word{font-size:36px;font-weight:900;line-height:1.15}
+.word small{display:block;font-size:20px;color:var(--mut);font-weight:700;margin-top:6px}
+.timer{font-size:82px;font-weight:900;font-variant-numeric:tabular-nums}
+.timer.low{color:var(--red)}
+.pill{display:inline-block;background:#22264a;border-radius:99px;padding:8px 14px;font-weight:700;margin:4px}
+.pill.r{background:var(--red)}
+.dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots span.on{background:var(--red)}
+.err{color:var(--gold);text-align:center;font-weight:700;min-height:1em;margin:0}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// [romanized, devanagari]
+const CATS = {
+  meme: {i:'😎', n:['Meme ra Celeb','मिम र सेलेब'], w:[
+    ['Rajesh Hamal','राजेश हमाल'],['Mahanayak','महानायक'],['Dhurmus','धुर्मुस'],['Suntali','सुन्तली'],
+    ['Madan Krishna','मदनकृष्ण'],['Hari Bansha','हरिवंश'],['Balen','बालेन'],['Paras Khadka','पारस खड्का'],
+    ['Rohit Paudel','रोहित पौडेल'],['Nikhil Upreti','निखिल उप्रेती'],['Bhuwan KC','भुवन केसी'],['Priyanka Karki','प्रियंका कार्की'],
+    ['Dayahang Rai','दयाहाङ राई'],['Wilson Bikram','विल्सन बिक्रम'],['Magne Buda','मग्ने बुढा'],['Bipul Chettri','बिपुल क्षेत्री'],
+    ['Sushant KC','सुशान्त केसी'],['Yama Buddha','यम बुद्ध'],['VTEN','भिटेन'],['Gajab Chha Baje','गजब छ बाजे'],
+    ['Ke Garne Ta','के गर्ने त'],['Babal','बबाल'],['Chhya!','छ्या!'],['Hait!','हैट!'],['Lau Na Ni','लौ न नि'],['Oho Daju','ओहो दाजु']]},
+  daily: {i:'🍵', n:['Dainik Jiwan','दैनिक जीवन'], w:[
+    ['Chiya','चिया'],['Momo','मोमो'],['Dal Bhat','दाल भात'],['Chowmein','चाउमिन'],['Panipuri','पानीपुरी'],['Wai Wai','वाइ वाइ'],
+    ['Laphing','लाफिङ'],['Chatpate','चटपटे'],['Gundruk','गुन्द्रुक'],['Dhindo','ढिंडो'],['Achar','अचार'],['Lassi','लस्सी'],
+    ['Tempo','टेम्पो'],['Micro','माइक्रो'],['Conductor Dai','कन्डक्टर दाइ'],['Pathao','पठाओ'],['Load Shedding','लोडसेडिङ'],
+    ['Traffic Jam','ट्राफिक जाम'],['Gas Cylinder','ग्यास सिलिन्डर'],['Pressure Cooker','प्रेसर कुकर'],['Chappal','चप्पल'],
+    ['Dhara','धारा'],['Pasal','पसल'],['Khaja','खाजा'],['Bhauju','भाउजू'],['Sasurali','ससुराली'],['eSewa','इसेवा'],['Tarkari Bazaar','तरकारी बजार']]},
+  trad: {i:'🪔', n:['Paramparagat','परम्परागत'], w:[
+    ['Dashain','दशैं'],['Tihar','तिहार'],['Teej','तीज'],['Chhath','छठ'],['Holi','होली'],['Gai Jatra','गाईजात्रा'],
+    ['Indra Jatra','इन्द्रजात्रा'],['Bisket Jatra','बिस्केट जात्रा'],['Lhosar','ल्होसार'],['Sel Roti','सेलरोटी'],['Yomari','योमरी'],
+    ['Juju Dhau','जुजु धौ'],['Daura Suruwal','दौरा सुरुवाल'],['Dhaka Topi','ढाका टोपी'],['Gunyu Cholo','गुन्यु चोलो'],['Khukuri','खुकुरी'],
+    ['Madal','मादल'],['Sarangi','सारङ्गी'],['Lakhe','लाखे'],['Ping','पिङ'],['Changa','चङ्गा'],['Tika','टीका'],['Jamara','जमरा'],
+    ['Deusi Bhailo','देउसी भैलो'],['Doko','डोको'],['Namlo','नाम्लो'],['Panche Baja','पञ्चे बाजा'],['Bratabandha','व्रतबन्ध'],['Pasni','पास्नी']]},
+  place: {i:'🏔️', n:['Thau','ठाउँ'], w:[
+    ['Pashupatinath','पशुपतिनाथ'],['Swayambhu','स्वयम्भू'],['Boudha','बौद्ध'],['Dharahara','धरहरा'],['Pokhara','पोखरा'],
+    ['Phewa Tal','फेवा ताल'],['Lumbini','लुम्बिनी'],['Sagarmatha','सगरमाथा'],['Chitwan','चितवन'],['Janakpur','जनकपुर'],
+    ['Thamel','ठमेल'],['Ratna Park','रत्नपार्क'],['Bhaktapur','भक्तपुर'],['Rara Tal','रारा ताल'],['Mustang','मुस्ताङ'],
+    ['Nagarkot','नगरकोट'],['Ilam','इलाम'],['Bandipur','बन्दीपुर'],['Kalanki','कलंकी'],['Gongabu Buspark','गोंगबु बसपार्क']]}
+};
+const T = {
+  title:['Imposter <span>Ko Ho?</span>','इम्पोस्टर <span>को हो?</span>'],
+  tag:['Sathi haru sanga khela, imposter lai chin!','साथीहरूसँग खेल, इम्पोस्टरलाई चिन!'],
+  players:['Kheladi','खेलाडी'], imps:['Imposter','इम्पोस्टर'], time:['Samaya (min)','समय (मिनेट)'],
+  cats:['Bishaya','विषय'], names:['Kheladi ko naam','खेलाडीको नाम'], hint:['Imposter lai bishaya dekhau','इम्पोस्टरलाई विषय देखाऊ'],
+  start:['Khel Suru Gara','खेल सुरु गर'], pick:['Kamti ma ek bishaya chhana!','कम्तीमा एउटा विषय छान!'],
+  p:['Kheladi','खेलाडी'], pass:['Phone {n} lai deu','फोन {n}लाई देऊ'], tap:['Herna thich','हेर्न थिच'],
+  only:['Aru le naherun hai! 👀','अरूले नहेरून् है! 👀'], your:['Timro shabda','तिम्रो शब्द'],
+  you:['Timi Imposter Hau!','तिमी इम्पोस्टर हौ!'], blend:['Kasaile thaha napaos 🤫','कसैले थाहा नपाओस् 🤫'],
+  cat:['Bishaya','विषय'], next:['Lukau ra arko lai deu','लुकाऊ र अर्कोलाई देऊ'], done:['Sabai le heryo, chhalfal suru!','सबैले हेरे, छलफल सुरु!'],
+  disc:['Chhalfal','छलफल'], first:['{n} le suru gara','{n}ले सुरु गर'],
+  help:['Palo palo shabda ko bare ek kura bhana. Imposter lai chin!','पालैपालो शब्दबारे एउटा कुरा भन। इम्पोस्टरलाई चिन!'],
+  up:['Samaya sakiyo! Vote gara 🗳️','समय सकियो! भोट गर 🗳️'], vote:['Vote bhayo, Imposter Dekhau','भोट भयो, इम्पोस्टर देखाऊ'],
+  was:['Imposter thiyo','इम्पोस्टर थियो'], word:['Shabda thiyo','शब्द थियो'],
+  again:['Feri Khela','फेरि खेल'], home:['Suru ma Ja','सुरुमा जाऊ'], quit:['Khel chhodne?','खेल छोड्ने?']
+};
+const store = { get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
+const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:['meme','daily','trad','place'],names:[],hint:true}, store.get('cfg',{}));
+let G = null, tick = null;
+const app = document.getElementById('app');
+const t = (k,n) => T[k][S.lang].replace('{n}', n);
+const L = pair => pair[S.lang];
+const other = pair => pair[1-S.lang];
+const nameOf = i => (S.names[i]||'').trim() || t('p') + ' ' + (i+1);
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const save = () => store.set('cfg', S);
+const rnd = n => Math.floor(Math.random()*n);
+const buzz = ms => navigator.vibrate && navigator.vibrate(ms);
+
+function home(err=''){
+  clearInterval(tick); G = null;
+  const maxImp = Math.max(1, Math.floor((S.n-1)/2));
+  S.imp = Math.min(S.imp, maxImp);
+  app.innerHTML = `
+  <div class="top"><div class="seg"><button data-l="0" class="${S.lang?'':'on'}">Roman</button><button data-l="1" class="${S.lang?'on':''}">नेपाली</button></div></div>
+  <h1>${t('title')}</h1><p class="sub">${t('tag')}</p>
+  <div class="box">
+    <div class="row">${t('players')}<div class="step"><button data-s="n,-1">−</button><b>${S.n}</b><button data-s="n,1">+</button></div></div>
+    <div class="row">${t('imps')}<div class="step"><button data-s="imp,-1">−</button><b>${S.imp}</b><button data-s="imp,1">+</button></div></div>
+    <div class="row">${t('time')}<div class="step"><button data-s="time,-1">−</button><b>${S.time}</b><button data-s="time,1">+</button></div></div>
+    <label class="tog">${t('hint')}<input type="checkbox" id="hint" ${S.hint?'checked':''}></label>
+  </div>
+  <h2>${t('cats')}</h2>
+  <div class="chips">${Object.entries(CATS).map(([k,c])=>`<button class="chip ${S.cats.includes(k)?'on':''}" data-c="${k}"><i>${c.i}</i>${L(c.n)}</button>`).join('')}</div>
+  <h2>${t('names')}</h2>
+  <div class="names">${Array.from({length:S.n},(_,i)=>`<input data-i="${i}" maxlength="14" placeholder="${t('p')} ${i+1}" value="${esc(S.names[i]||'')}">`).join('')}</div>
+  <p class="err">${err}</p>
+  <button class="btn" id="go">${t('start')} ▶</button>`;
+  app.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{S.lang=+b.dataset.l;save();home()});
+  app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{
+    const [k,d]=b.dataset.s.split(','); const lim={n:[3,15],imp:[1,maxImp],time:[1,10]}[k];
+    S[k]=Math.min(lim[1],Math.max(lim[0],S[k]+ +d)); save(); home();
+  });
+  app.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.c; S.cats=S.cats.includes(k)?S.cats.filter(x=>x!==k):[...S.cats,k]; save(); b.classList.toggle('on');
+  });
+  app.querySelectorAll('[data-i]').forEach(inp=>inp.oninput=()=>{S.names[+inp.dataset.i]=inp.value;save()});
+  document.getElementById('hint').onchange=e=>{S.hint=e.target.checked;save()};
+  document.getElementById('go').onclick=()=>S.cats.length?newRound():home(t('pick'));
+}
+
+function newRound(){
+  const ck = S.cats[rnd(S.cats.length)], cat = CATS[ck];
+  const imps = new Set(); while(imps.size<S.imp) imps.add(rnd(S.n));
+  G = {cat, word:cat.w[rnd(cat.w.length)], imps, i:0, first:rnd(S.n)};
+  reveal();
+}
+
+function reveal(){
+  const i = G.i, isImp = G.imps.has(i), last = i===S.n-1;
+  app.innerHTML = `
+  <div class="dots">${Array.from({length:S.n},(_,k)=>`<span class="${k<=i?'on':''}"></span>`).join('')}</div>
+  <div class="grow">
+    <p class="big">${t('pass', esc(nameOf(i)))}</p>
+    <div class="flip" id="card"><div>
+      <div class="face front"><div class="q">❓</div><b style="font-size:22px">${t('tap')}</b><span class="sub">${t('only')}</span></div>
+      <div class="face back ${isImp?'imp':''}">${isImp
+        ? `<div style="font-size:70px">🕵️</div><div class="word">${t('you')}</div>${S.hint?`<span class="pill">${t('cat')}: ${G.cat.i} ${L(G.cat.n)}</span>`:''}<span class="sub">${t('blend')}</span>`
+        : `<h2>${t('your')}</h2><div class="word">${L(G.word)}<small>${other(G.word)}</small></div><span class="pill">${G.cat.i} ${L(G.cat.n)}</span>`}
+      </div>
+    </div></div>
+    <button class="btn alt" id="nx" style="visibility:hidden">${last?t('done'):t('next')}</button>
+  </div>`;
+  const card = document.getElementById('card'), nx = document.getElementById('nx');
+  card.onclick = () => { card.classList.add('open'); buzz(isImp?[60,60,60]:40); nx.style.visibility='visible'; };
+  nx.onclick = () => { card.classList.remove('open'); nx.style.visibility='hidden'; setTimeout(()=>{ if(last) discuss(); else {G.i++; reveal();} }, 350); };
+}
+
+function discuss(){
+  let left = S.time*60;
+  app.innerHTML = `
+  <div class="grow">
+    <h2>${t('disc')}</h2>
+    <p class="big">🎤 ${t('first', esc(nameOf(G.first)))}</p>
+    <p class="sub">${t('help')}</p>
+    <div class="timer" id="tm"></div>
+    <p class="err" id="up"></p>
+  </div>
+  <button class="btn" id="rv">${t('vote')}</button>`;
+  const tm = document.getElementById('tm');
+  const draw = () => { tm.textContent = Math.floor(left/60)+':'+String(left%60).padStart(2,'0'); tm.classList.toggle('low', left<=10); };
+  draw();
+  tick = setInterval(()=>{ left--; draw(); if(left<=0){ clearInterval(tick); buzz([300,100,300]); document.getElementById('up').textContent=t('up'); } }, 1000);
+  document.getElementById('rv').onclick = result;
+}
+
+function result(){
+  clearInterval(tick);
+  app.innerHTML = `
+  <div class="grow">
+    <div style="font-size:80px">🕵️</div>
+    <h2>${t('was')}</h2>
+    <div>${[...G.imps].map(i=>`<span class="pill r" style="font-size:22px">${esc(nameOf(i))}</span>`).join('')}</div>
+    <h2>${t('word')}</h2>
+    <div class="word">${L(G.word)}<small>${other(G.word)}</small></div>
+    <span class="pill">${G.cat.i} ${L(G.cat.n)}</span>
+  </div>
+  <button class="btn" id="ag">${t('again')} 🔁</button>
+  <button class="btn ghost" id="hm">${t('home')}</button>`;
+  document.getElementById('ag').onclick = newRound;
+  document.getElementById('hm').onclick = () => home();
+}
+
+// Called by Android back button; return true if handled.
+window.goBack = () => { if(!G) return false; if(confirm(t('quit'))) home(); return true; };
+home();
+</script>
+</body>
+</html>
