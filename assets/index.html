@@ -194,6 +194,139 @@ const CATS = {
     ['Pirate','समुद्री डाकु'],['Robot','रोबोट'],['Dinosaur','डाइनोसर'],['Ice Cream','आइसक्रिम'],['Chocolate','चकलेट'],['Swimming','पौडी'],
     ['Moon','चन्द्रमा'],['Fire','आगो']]}
 };
+// Close hint the imposter sees, keyed by romanized word (falls back to category only).
+const HINTS = {
+  // meme
+  'Shankar Hu Ma Shankar':'Mahanayak ko dialogue','Gajab Chha Baje':'Achamma pareko bela bhanne','Ke Garne Ta':'Upaya nabhaeko bela','Babal':'Ekdam ramro / dangerous',
+  'Chhya!':'Ghin lageko awaj','Hait!':'Rishaune ek shabda','Lau Na Ni':'Kasailai karkaap garda','Oho Daju':'Daju lai jiskaune',
+  'Ambani ko Aulad':'Dherai kharcha garne lai taunt','Aura -9999':'Lajjaspad kaam pachhi','Jhyau Lagyo':'Bore bhaeko feel','Kya Majja':'Ramailo feel',
+  'Aaile Aauchhu':'Jhuto promise, kahile aaudaina','Nepali Time':'Dhilo pugne bani','Ekchhin Hai':'Parkhaune shabda','Bhai Kati Ho?':'Pasal ma mol bhau',
+  'Dai Milaidinu Na':'Discount / help magne','Khana Khanu Bhayo?':'Nepali ko greeting','Padhai Kasto Chha?':'Aafantale sodhne prashna','Bihe Kahile?':'Dashain ma sodhine prashna',
+  'Mamu le Kutchhin':'Ghar ma dar','Wifi ko Password?':'Kasaiko ghar pugne bittikai','Paisa Chhaina':'Mahina ko anta','Tension Nalinu':'Sanjha sanjhaune line',
+  'Pheri Bhetaula':'Bidaai garda','Chuna Laga Diya':'Thagiyo','Ko Ho Yo Sexy Keta':'Viral comment line','Sab Thik Chha':'Jhutai bhanne jawaf',
+  'Hajur Ko Sanchai?':'Aadar sanga greeting','Thug Life Nepal':'Chasma khasne meme','Nepali Babu':'Kanchha ko pyar naam',
+  // celeb
+  'Rajesh Hamal':'Long coat, Mahanayak','Mahanayak':'Sabai bhanda thulo hero','Dhurmus':'Comedy jodi, ghar banaidine','Suntali':'Comedy jodi ko mahila',
+  'Madan Krishna':'MaHa jodi, harmonium','Hari Bansha':'MaHa jodi, sano kad','Magne Buda':'Budo comedy character','Balchhi Dhurbe':'Purano TV comedy character',
+  'Rate Kaila':'Comedy serial ko character','Priyanka Karki':'Heroine, Ayushman ko mummy','Swastima Khadka':'Heroine, Bulbul film','Rekha Thapa':'Action heroine, Rani',
+  'Nikhil Upreti':'Action hero, stunt','Bhuwan KC':'Purano romantic hero','Dayahang Rai':'Kabaddi film ko hero','Saugat Malla':'Loot ko hero',
+  'Wilson Bikram':'Comedy actor, Rai','Anmol KC':'Chocolate hero, Bhuwan ko chhora','Paul Shah':'Young hero, hit gana','Barsha Raut':'Heroine, Instagram famous',
+  'Keki Adhikari':'Heroine, Producer pani','Bipin Karki':'Serious actor, Jaar','Sushant Pradhan':'Podcast wala','Sisan Baniya':'YouTuber, comedy video',
+  'Ganesh GD':'Content creator, comedy','BT Kancha':'Social media ko kanchha','Biki Roaster':'Roast garne YouTuber','Aayush Abhay':'YouTube content creator',
+  'Sukumaya':'Viral social media naam','Zunu Y':'Social media star',
+  // genz
+  'Nepo Kids':'Neta ka chhora chhori ko flex','Gen Z Andolan':'Bhadau 2082 ko sadak','Discord':'Gamer haru ko chat app','Discord ma PM':'Online bata neta chhaneko',
+  'Social Media Ban':'Facebook band','One Piece Jhanda':'Anime ko pirate flag','VPN':'Block bhaeko app chalauna','Bitchat':'Bluetooth ma chat',
+  'TikTok':'Chhoto video app','Reels':'Instagram ko video','Live Aaunu':'Real time ma video','Seen Garera Chhodnu':'Reply nagarne','Blue Tick':'Verified account',
+  'Rizz':'Patauna sakne kala','Brain Rot':'Dherai scroll garda dimag','Sigma':'Eklai hidne male','NPC':'Game ko background character','Delulu':'Sapana ma bachne',
+  'Crush':'Mann parne manchhe','Situationship':'Relation ho ki haina','Hashtag':'# chinha','Viral Video':'Sabai le share gareko','Free Fire':'Mobile battle game',
+  'PUBG':'Chicken dinner game','Ludo King':'Paasa phalne game','Online Class':'Covid ma Zoom','Story Halnu':'24 ghanta ko photo','Netflix Documentary':'Streaming ma sachho kahani',
+  'Balen ko Chasma':'Kalo gol chasma','Rap Battle':'Barz ko jhagada',
+  // neta
+  'Balen Shah':'Rapper mayor, Kathmandu','Harka Sampang':'Dharan ko mayor','Rabi Lamichhane':'TV presenter bata neta, ghanti','Sushila Karki':'Pahilo mahila pradhan nyayadhish',
+  'KP Oli':'Surya chinha, kura ko mithai','Prachanda':'Maobadi neta, pahilo PM 2065','Sher Bahadur Deuba':'Rukh chinha, 5 choti PM','Rishi Dhamala':'Patrakar, TV interview',
+  'Chunab':'Pratyek 5 barsa','Bhashan':'Mancha ma lamo kura','Ghosana Patra':'Chunab agadi ko wada','Singha Durbar':'Sarkar ko seto bhawan','Sansad':'Saansad basne thau',
+  'Andolan':'Sadak ma birodh','Bandh':'Pasal sabai band','Chakka Jam':'Gaadi nachalne din','Bhrastachar':'Ghus khane','Mantri ko Gaadi':'Siren bajaune gaadi',
+  'Pajero':'Neta ko pyaro gaadi','Bhot Halnu':'Chhap lagaune',
+  // film
+  'Kabaddi':'Gaun ko maya, Kaji','Chhakka Panja':'Deepa-Deepak comedy film','Jatra':'Jail bata suru comedy','Loot':'Bank lutne film','Haku Kale':'Loot ko character',
+  'Pashupati Prasad':'Mandir ma bachne keta film','Kusume Rumal':'Purano romantic film','Chino':'Purano hit film','Deuta':'Mahanayak ko purano film',
+  'Prem Geet':'Pradeep Khadka romantic film','Mahajatra':'MaHa jodi ko film','Jire Khursani':'Raajniti satire film','Meri Bassai':'Gaun ko TV comedy',
+  'Halka Ramailo':'Hapta ko TV comedy','Bhadragol':'Hasaune TV serial','Ulto Sulto':'TV comedy serial','Tito Satya':'Samaj ko kura garne serial',
+  'Mundre ko Comedy Club':'Stand-up comedy show','Comedy Champion':'Comedy competition show','Nepal Idol':'Gayan competition','Hasyabyangya':'Hasaune ra chhedne kala',
+  'Kollywood':'Nepali film industry','Gopi':'Purano hit Nepali film','Bulbul':'Tempo chalaune mahila film','Saili':'Gaun ki keti film',
+  // music
+  'Resham Firiri':'Sabai bhanda famous lok geet','Sayaun Thunga Phulka':'Rastriya gaan','Narayan Gopal':'Swar samrat','Aruna Lama':'Pahad ki kokila',
+  'Bipul Chettri':'Darjeeling ko folk singer','Sajjan Raj Vaidya':'Guitar ra pop geet','Swoopna Suman':'Young pop singer','1974 AD':'Purano rock band',
+  'Nepathya':'Amrit Gurung ko band','Kutumba':'Instrumental folk band','Yama Buddha':'Nepali hip hop legend','VTEN':'Underground rapper','Laure':'Rapper, battle',
+  'Sacar':'Rapper, Lil Buddha','Uniq Poet':'Poet rapper','Trishna Gurung':'Mitho swar ki gayika','Anjana Baraili':'Pop gayika','Melina Rai':'Teej ra pop gayika',
+  'Pramod Kharel':'Romantic singer','Lok Dohori':'Sawal jawaf gana','Teej Geet':'Mahila ko chad ma gana','Raw Barz':'Rap battle platform',
+  'Madal':'Haat le bajaune baja','Sarangi':'Gandharva ko baja',
+  // food
+  'Momo':'Steam ma pakaune dumpling','Jhol Momo':'Ras ma dubeko dumpling','C-Momo':'Piro sauce ma dumpling','Buff Momo':'Rango masu ko dumpling',
+  'Dal Bhat':'Din ko dui choti khana','Chowmein':'Bhutne noodles','Panipuri':'Amilo pani bhareko gol','Chatpate':'Bhuja ra masala mix','Laphing':'Chiso piro Tibetan khana',
+  'Wai Wai':'Kacha khane chauchau','Rara Noodles':'Seto chauchau','Chiya':'Bihana ko taato pey','Sel Roti':'Tihar ko gol roti','Yomari':'Newari mithai, chaku bhitra',
+  'Chatamari':'Newari pizza','Bara':'Dal ko pakaeko roti','Choila':'Piro poleko masu','Sukuti':'Sukeko masu','Sekuwa':'Aago ma poleko masu','Thakali Khana':'Pahad ko thali',
+  'Dhindo':'Pitho ko lapsi jasto','Gundruk':'Sukeko saag','Kinema':'Bhatmas ko fermented khana','Aloo Tama':'Bans ko tusa ra aalu','Bhatmas Sadeko':'Piro chana jasto snack',
+  'Aloo Sadeko':'Piro aalu snack','Thukpa':'Ras wala noodles','Samosa':'Tirkone tareko','Jeri Swari':'Mitho tareko ra roti','Lassi':'Dahi ko pey',
+  'Juju Dhau':'Bhaktapur ko dahi','Kwati':'Nau thari gedagudi','Achar':'Khana sanga piro sathi','Makai Bhatmas':'Bhuteko dana, Dashain snack',
+  // life
+  'Tempo':'Tin pangre gaadi','Micro':'Sano bus, khaachakhach','Conductor Dai':'Bus ma paisa uthaune','Pathao':'Bike ride app','inDrive':'Aafai mol garne ride app',
+  'Load Shedding':'Batti jane schedule','Traffic Jam':'Sadak ma rokiyo','Gas Cylinder':'Bhanchha ko rato bottle','Petrol ko Line':'Pump ma lamo line','Pressure Cooker':'Seeti bajaune bhado',
+  'Chappal':'Mamu ko hatiyar','Dhara':'Pani aaune thau','Kirana Pasal':'Chhimeki ko sano pasal','Udhaaro':'Paisa pachhi dinchhu','Bhauju':'Daju ko srimati',
+  'Sasurali':'Srimati ko ghar','Relative ko Prashna':'Kati number aayo?','eSewa':'Hariyo wallet app','Khalti':'Baijani wallet app','Lok Sewa':'Sarkari jagir ko exam',
+  'SEE Result':'Class 10 ko natija','IELTS':'Bidesh jana English test','Australia PR':'Kangaroo desh ma basobas','Korea EPS':'Kamko lagi Korean bhasa exam',
+  'Qatar Malaysia':'Khadi ra Asia ma kaam','Japan ko Visa':'Sakura desh jana','Sarkari Office':'Bholi aaunu bhanne thau','Malpot':'Jagga ko kagaj office',
+  'Buspark':'Gaadi chadne thulo thau','Khaldo Sadak':'Bato ma pokhari','Dhulo':'Kathmandu ko mask kina','Tution Class':'School pachhi padhai',
+  // trad
+  'Dashain':'Tika ra jamara ko chad','Tihar':'Batti ra deusi ko chad','Teej':'Rato sari ra brata','Chhath':'Surya lai arghya','Holi':'Rang khelne chad',
+  'Gai Jatra':'Mareka ko samjhana ma hasaune jatra','Indra Jatra':'Kumari ko rath','Bisket Jatra':'Bhaktapur ko naya barsa','Lhosar':'Himali naya barsa',
+  'Maghe Sankranti':'Til ko laddu ra ghiu','Janai Purnima':'Haat ma doro badhne','Daura Suruwal':'Purush ko rastriya poshak','Dhaka Topi':'Tauko ma lagaune',
+  'Gunyu Cholo':'Keti ko paramparagat poshak','Khukuri':'Gorkha ko hatiyar','Lakhe':'Rato mukhauta naach','Ping':'Dashain ma ghumne','Changa':'Akash ma udaune',
+  'Tika':'Nidhar ma rato','Jamara':'Pahelo ankur','Deusi Bhailo':'Tihar ma ghar ghar gaune','Kukur Tihar':'Bhau bhau lai mala','Bhai Tika':'Didi bahini ko pooja',
+  'Doko':'Pith ma bokne tokari','Namlo':'Nidhar ma bhari','Panche Baja':'Bihe ko baja','Bratabandha':'Keta ko kapal khauraune sanskar','Pasni':'Bachha ko pahilo bhat',
+  'Dakshina':'Tika pachhi paisa','Mandir ko Ghanti':'Pooja ma bajaune','Tongba':'Bans ko bhado ma pey',
+  // sport
+  'Paras Khadka':'Purano cricket captain','Rohit Paudel':'Young cricket captain','Dipendra Airee':'6 ball 6 chhakka','Kushal Bhurtel':'Opening batsman',
+  'Karan KC':'Fast bowler, finisher','Sompal Kami':'Fast bowler, all rounder','Kirtipur Ground':'TU ko cricket maidan','Dasharath Stadium':'Tripureshwor ko football maidan',
+  'Nepal Premier League':'T20 franchise league','Cricket':'Bat ra ball','Football':'Khutta le gol','Volleyball':'Jaal mathi haat le','Dandi Biyo':'Lauro ra sano kaath',
+  'Bagh Chal':'Bagh ra bakhra board game','Carrom Board':'Striker le goti','Lukamari':'Lukera khojne','Chungi':'Khutta le uchhalne rubber','Gatti':'Dhunga uchhalne khel',
+  'Marathon':'42 km dagurne',
+  // place
+  'Pashupatinath':'Shiva ko mandir, Bagmati','Swayambhu':'Bandar ko mandir, aankha','Boudha':'Thulo stupa, Tibetan','Dharahara':'Aglo tower','Pokhara':'Tal ko sahar',
+  'Phewa Tal':'Dunga ra Barahi','Lumbini':'Buddha janmeko','Sagarmatha':'Sansar ko aglo','Chitwan':'Gainda ko jungle','Janakpur':'Sita ko janma thau',
+  'Thamel':'Tourist ra nightlife','Ratna Park':'Bus ra park, Kathmandu','Bhaktapur':'Juju dhau ko sahar','Rara Tal':'Thulo tal, Mugu','Mustang':'Himal pari ko marubhumi',
+  'Nagarkot':'Suryoday herne danda','Ilam':'Chiya bagan','Bandipur':'Danda ma purano bazaar','Kalanki':'Traffic jam ko chowk','Gongabu Buspark':'Lamo dooriko bus',
+  'Basantapur':'Kumari ghar, durbar square','Durbar Marg':'Mahango shopping sadak','Jhapa':'Purba ko terai, chiya','Dharan':'Ghantaghar ra Bhanu Chowk',
+  'Butwal':'Pashchim terai ko sahar','Birgunj':'Bharat border ko sahar','Tribhuvan Airport':'Jahaj udne thau','Kalinchowk':'Hiun ra mandir, Dolakha',
+  // hindi
+  'Rasode Mein Kaun Tha':'Serial ko kitchen meme','Binod':'Comment ma naam matra','Jethalal':'Gokuldham ko businessman','Babu Bhaiya':'Hera Pheri ko budo',
+  'Utha Le Re Baba':'Bhagwan sanga magne','Ye Baburao Ka Style Hai':'Hera Pheri ko dialogue','Paisa Hi Paisa Hoga':'Lottery jasto scheme','Kehna Kya Chahte Ho':'Confuse bhaeko dialogue',
+  'Moye Moye':'Dukha ko viral gana','Bahut Hard':'Gully Boy ko line','Elvish Bhai':'Bigg Boss winner YouTuber','Carry Minati':'Roast garne Indian YouTuber',
+  'Bhuvan Bam':'BB Ki Vines','Dhinchak Pooja':'Selfie maine le li','Thappad Se Darr Nahi Lagta':'Pyaar se lagta hai','Kitne Aadmi The':'Gabbar ko prashna',
+  'Mogambo Khush Hua':'Villain ko khushi','Ek Chutki Sindoor':'Om Shanti Om dialogue','Mere Karan Arjun Aayenge':'Aama ko bharosa','All Is Well':'3 Idiots ko mantra',
+  'Pawri Ho Rahi Hai':'Pakistani viral girl','Just Looking Like a Wow':'Kapda bechne viral auntie','Bigg Boss':'Ghar ma band reality show','Kapil Sharma Show':'Hindi comedy show',
+  'Taarak Mehta':'Gokuldham society serial','Hum Nahi Sudhrenge':'Ziddi attitude line','Jalwa Hai Hamara':'Swag dekhaune line','Picture Abhi Baaki Hai':'Abai sakiyeko chhaina',
+  'Bhai Kya Kar Raha Hai Tu':'Saathi lai confuse','Ye Dukh Kahe Khatam Nahi Hota':'Sad meme dialogue',
+  // bolly
+  'Shah Rukh Khan':'Baadshah, haat failaune','Salman Khan':'Bhaijaan, Being Human','Amitabh Bachchan':'Big B, KBC','Ranveer Singh':'Ajib kapda, energetic','Ranbir Kapoor':'Animal ko hero',
+  'Kartik Aaryan':'Lamo monologue hero','Alia Bhatt':'Gangubai','Deepika Padukone':'Padmaavat ki rani','Katrina Kaif':'Sheila ki jawani','Akshay Kumar':'Khiladi, barsa ma 4 film',
+  'Aamir Khan':'Mr Perfectionist','Hrithik Roshan':'Greek god, dance','Shraddha Kapoor':'Stree ki heroine','Sholay':'Gabbar ra Jai Veeru','DDLJ':'Train ma haat diyo',
+  '3 Idiots':'Engineering college comedy','Hera Pheri':'Raju Shyam Babu Bhaiya','Animal':'Hinsak baau chhora film','Jawan':'SRK ko taklo look','Pathaan':'SRK ko spy film',
+  'Kabir Singh':'Daaru ra rishaune doctor','Dhoom':'Bike chor film','Stree':'Bhoot horror comedy','Golmaal':'Comedy gang film','Welcome':'Majnu bhai painting',
+  'Bhool Bhulaiyaa':'Manjulika horror','Kabhi Khushi Kabhie Gham':'K3G parivar','Chak De India':'Hockey coach','Dangal':'Kusti khelne chhori','Saiyaara':'2025 ko romantic hit',
+  'Tauba Tauba':'Vicky Kaushal ko dance','Chammak Challo':'Ra.One ko item gana',
+  // south
+  'Pushpa':'Rato chandan ko smuggler','Pushpa Jhukega Nahi':'Daari musarne dialogue','Allu Arjun':'Icon star, Pushpa','Prabhas':'Baahubali ko hero','Baahubali':'Mahishmati ko raja',
+  'Katappa ne Baahubali ko Kyu Mara':'Thulo suspense prashna','KGF':'Sun ko khani','Rocky Bhai':'Violence violence violence','Yash':'KGF ko hero','RRR':'Dui hero ko dosti',
+  'Naatu Naatu':'Oscar jiteko dance','Rajinikanth':'Thalaiva, chasma ghumaune','Thalapathy Vijay':'Tamil superstar','Mahesh Babu':'Prince of Tollywood','Jr NTR':'RRR ko Bheem',
+  'Ram Charan':'RRR ko Ram','Rashmika Mandanna':'National crush','Samantha':'Oo Antava gana ki heroine','Vikram':'Kamal Haasan action film','Kantara':'Daiva naach film',
+  'Salaar':'Prabhas ko action film','Jailer':'Rajini ko jail film','Robot Chitti':'Rajini ko robot','Srivalli':'Pushpa ko maya','Oo Antava':'Pushpa ko item gana',
+  'Lungi Dance':'Rajini lai tribute gana','Goldmines Dubbed':'YouTube ma Hindi dub channel','Kanchana':'Horror comedy south film','Hindi Dubbed Action':'TV ma rati aaune film',
+  'Slow Motion Entry':'Hero aaune style',
+  // holly
+  'Avengers':'Superhero team','Iron Man':'Suit lagaune billionaire','Spider-Man':'Jaal phyakne hero','Batman':'Chamero hero','Joker':'Hasne villain','Thanos':'Chutki le aadha',
+  'Harry Potter':'Jadugar keta, chasma','Titanic':'Dubne jahaj','Avatar':'Nilo manchhe','Jurassic Park':'Dinosaur park','Fast and Furious':'Car ra family',
+  'The Rock':'Aiburo uchaalne wrestler','Tom Cruise':'Aafai stunt garne hero','Leonardo DiCaprio':'Titanic ko hero','John Wick':'Kukur ko badla','Barbie':'Gulabi putali film',
+  'Oppenheimer':'Atom bomb film','Minions':'Pahelo sana jiv','Frozen':'Let it go','Stranger Things':'Upside down series','Game of Thrones':'Dragon ra gaddi',
+  'Breaking Bad':'Chemistry teacher drug','Mr Bean':'Nabolne comedy','Shrek':'Hariyo ogre','Transformers':'Car bata robot','Star Wars':'Light saber',
+  'Jack Sparrow':'Pirate captain','Deadpool':'Rato suit, gali dine hero','Wednesday':'Addams family ki keti','Mission Impossible':'Ethan Hunt spy','Superman':'Rato cape, udne',
+  'Interstellar':'Space ra time film',
+  // engnp
+  'Setting':'Bhitra bata milaune','Source Force':'Chineko manchhe le kaam','Chance':'Mauka','Recharge':'Phone ma balance','Data Pack':'Internet kinne','Hotspot':'Arkaiko internet share',
+  'Ncell':'Baijani SIM','NTC':'Sarkari SIM','Bike':'Dui pangre','Helmet':'Tauko ko suraksha','Treat':'Khuwaunu parchha aba','Party':'Ramailo jamghat','Sorry':'Maaf magne',
+  'Full Tight':'Dherai matiyeko','Bus Stop':'Gaadi rokine thau','Hostel':'Ghar bahira basne','Room Rent':'Mahina ko bhada','Plus Two':'Class 11-12','Bachelor':'Plus two pachhi',
+  'Exam':'Pariksha','Cheating':'Chorera lekhne','Bunk':'Class bhagne','Canteen':'College ko khaja ghar','Boyfriend':'Keti ko maya','Girlfriend':'Keta ko maya',
+  'Breakup':'Relation sakiyo','Propose':'I love you bhanne','Senti':'Bhawuk bhaeko','Overtime':'Thap samaya kaam','Salary':'Mahina ko talab','Bonus':'Dashain ma thap paisa',
+  'Fresh Hunu':'Nuhaera taja',
+  // eng
+  'Umbrella':'Pani parda ota','Elephant':'Lamo sud bhaeko','Mirror':'Aafno anuhar herne','Pillow':'Sutda tauko muni','Toothbrush':'Bihana dant safa','Rainbow':'Saat rang akash ma',
+  'Airplane':'Akash ma udne gaadi','Hospital':'Birami jane thau','Library':'Kitab nai kitab','Volcano':'Aago ogalne pahad','Penguin':'Udna nasakne chara, hiun',
+  'Pizza':'Italian gol khana','Birthday':'Cake katne din','Wedding':'Dulaha dulahi','Ghost':'Rati darauna aaune','Doctor':'Sui dine manchhe','Teacher':'Kakshya ma padhaune',
+  'Police':'Seeti ra danda','Guitar':'Chha taar ko baja','Camera':'Photo khichne','Spider':'Aath khutta, jaal','Snake':'Khutta nabhaeko, susu','Monkey':'Rukh chadne, kera',
+  'Rocket':'Antariksha jane','Beach':'Baluwa ra chhal','Jungle':'Bagh ra rukh','Pirate':'Samudra ko chor','Robot':'Machine manchhe','Dinosaur':'Lopa bhaeko thulo jiv',
+  'Ice Cream':'Chiso mitho','Chocolate':'Khairo mitho','Swimming':'Pani ma tairine','Moon':'Rati ko ujyalo','Fire':'Taato ra rato'
+};
 const DARES = [
   ['Rajesh Hamal ko style ma "Shankar hu ma Shankar" bhana','राजेश हमालको स्टाइलमा "शंकर हुँ म शंकर" भन'],
   ['Ek line Lok Dohori gau','एक लाइन लोक दोहोरी गाऊ'],['Conductor Dai jasto "Kalanki Kalanki!" chicha','कन्डक्टर दाइ जस्तै "कलंकी कलंकी!" चिच्याऊ'],
@@ -212,7 +345,7 @@ const T = {
   title:['Imposter <span>Ko Ho?</span>','इम्पोस्टर <span>को हो?</span>'],
   tag:['Sathi haru sanga khela, imposter lai chin!','साथीहरूसँग खेल, इम्पोस्टरलाई चिन!'],
   players:['Kheladi','खेलाडी'], imps:['Imposter','इम्पोस्टर'], time:['Samaya (min)','समय (मिनेट)'],
-  cats:['Bishaya','विषय'], names:['Kheladi ko naam','खेलाडीको नाम'], hint:['Imposter lai bishaya dekhau','इम्पोस्टरलाई विषय देखाऊ'],
+  cats:['Bishaya','विषय'], names:['Kheladi ko naam','खेलाडीको नाम'], hint:['Imposter lai bishaya dekhau','इम्पोस्टरलाई विषय देखाऊ'], clue:['Imposter lai close hint deu','इम्पोस्टरलाई नजिकको हिन्ट देऊ'], cl:['Hint','हिन्ट'],
   start:['Khel Suru Gara','खेल सुरु गर'], pick:['Kamti ma ek bishaya chhana!','कम्तीमा एउटा विषय छान!'],
   p:['Kheladi','खेलाडी'], pass:['Phone {n} lai deu','फोन {n}लाई देऊ'], tap:['Herna thich','हेर्न थिच'],
   only:['Aru le naherun hai! 👀','अरूले नहेरून् है! 👀'], your:['Timro shabda','तिम्रो शब्द'],
@@ -228,7 +361,7 @@ const T = {
   again:['Feri Khela','फेरि खेल'], home:['Suru ma Ja','सुरुमा जाऊ'], quit:['Khel chhodne?','खेल छोड्ने?']
 };
 const store = { get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
-const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[],hint:true,under:false,theme:'dark'}, store.get('cfg',{}));
+const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[],hint:true,clue:true,under:false,theme:'dark'}, store.get('cfg',{}));
 // auto-select categories added since the last launch
 S.cats = [...new Set([...S.cats.filter(k => CATS[k]), ...Object.keys(CATS).filter(k => !(S.seen||[]).includes(k))])];
 S.seen = Object.keys(CATS);
@@ -273,6 +406,7 @@ function home(err=''){
     <div class="row">${t('imps')}<div class="step"><button data-s="imp,-1">−</button><b>${S.imp}</b><button data-s="imp,1">+</button></div></div>
     <div class="row">${t('time')}<div class="step"><button data-s="time,-1">−</button><b>${S.time}</b><button data-s="time,1">+</button></div></div>
     <label class="tog">${t('hint')}<input type="checkbox" id="hint" ${S.hint?'checked':''}></label>
+    <label class="tog">${t('clue')}<input type="checkbox" id="clue" ${S.clue?'checked':''}></label>
     <label class="tog">${t('under')}<input type="checkbox" id="under" ${S.under?'checked':''}></label>
   </div>
   <div class="row"><h2>${t('cats')}</h2><button class="seg-b" id="all">${t('all')} ✓</button></div>
@@ -292,6 +426,7 @@ function home(err=''){
   app.querySelectorAll('[data-i]').forEach(inp=>inp.oninput=()=>{S.names[+inp.dataset.i]=inp.value;save()});
   document.getElementById('th').onclick=()=>{S.theme=S.theme==='light'?'dark':'light';save();theme();home()};
   document.getElementById('hint').onchange=e=>{S.hint=e.target.checked;save()};
+  document.getElementById('clue').onchange=e=>{S.clue=e.target.checked;save()};
   document.getElementById('under').onchange=e=>{S.under=e.target.checked;save()};
   document.getElementById('all').onclick=()=>{S.cats=S.cats.length===Object.keys(CATS).length?[]:Object.keys(CATS);save();home()};
   document.getElementById('go').onclick=()=>S.cats.length?newRound():home(t('pick'));
@@ -317,7 +452,7 @@ function reveal(){
     <div class="flip" id="card"><div>
       <div class="face front"><div class="q">❓</div><b style="font-size:22px">${t('tap')}</b><span class="sub">${t('only')}</span></div>
       <div class="face back ${isImp?'imp':''}">${isImp
-        ? `<div style="font-size:70px">🕵️</div><div class="word">${t('you')}</div>${S.hint?`<span class="pill">${t('cat')}: ${G.cat.i} ${L(G.cat.n)}</span>`:''}<span class="sub">${t('blend')}</span>`
+        ? `<div style="font-size:70px">🕵️</div><div class="word">${t('you')}</div>${S.hint?`<span class="pill">${t('cat')}: ${G.cat.i} ${L(G.cat.n)}</span>`:''}${S.clue&&HINTS[G.word[0]]?`<span class="pill" style="background:var(--gold);color:#000">💡 ${t('cl')}: ${HINTS[G.word[0]]}</span>`:''}<span class="sub">${t('blend')}</span>`
         : `<h2>${t('your')}</h2><div class="word">${L(w)}<small>${other(w)}</small></div><span class="pill">${G.cat.i} ${L(G.cat.n)}</span>`}
       </div>
     </div></div>
