@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Imposter Ko Ho?</title>
 <style>
-:root{--bg:#0d0f1f;--card:#181b33;--line:#2a2e52;--red:#dc143c;--blue:#2d5bd8;--txt:#f3f4ff;--mut:#9aa0c7;--gold:#ffc83d;--btn:#22264a;--chip:#1f2343;--inp:#11132a;--chipon:#3a1426;--f1:#1b1f3d;--f2:#20244a}
-[data-theme=light]{--bg:#f4f5fb;--card:#fff;--line:#d9dcef;--txt:#14162e;--mut:#5d6290;--gold:#a86e00;--btn:#eceefa;--chip:#f7f8fe;--inp:#fff;--chipon:#ffe3ea;--f1:#e6e9fb;--f2:#dde1f8}
+:root{--bg:#f4f5fb;--card:#fff;--line:#d9dcef;--red:#dc143c;--blue:#2d5bd8;--txt:#14162e;--mut:#5d6290;--gold:#a86e00;--btn:#eceefa;--chip:#f7f8fe;--inp:#fff;--chipon:#ffe3ea;--f1:#e6e9fb;--f2:#dde1f8}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font-family:system-ui,"Noto Sans Devanagari",sans-serif}
 #app{min-height:100%;max-width:520px;margin:0 auto;padding:20px 16px 28px;display:flex;flex-direction:column;gap:16px}
@@ -37,7 +36,7 @@ h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:upper
 .btn.ghost{background:none;box-shadow:none;border:1px solid var(--line);color:var(--mut);font-size:16px;padding:14px}
 .grow{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
 .big{font-size:28px;font-weight:800;margin:0}
-.flip{width:100%;perspective:1000px;height:340px}
+.flip{width:100%;perspective:1000px;height:340px;touch-action:none;-webkit-touch-callout:none}
 .flip>div{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
 .flip.open>div{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;border:2px solid var(--line)}
@@ -54,12 +53,14 @@ h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:upper
 .dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
 .dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
 .dots span.on{background:var(--red)}
+.top .dots{gap:8px}.top .dots span{width:28px;height:8px;border-radius:99px}
+.names input{padding:14px 12px;font-size:16px}
 .seg-b{background:var(--btn);border:1px solid var(--line);color:var(--txt);border-radius:99px;padding:6px 14px;font:inherit;font-weight:700;font-size:14px}
 #splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .4s}
 #splash .logo{width:min(72vw,320px);aspect-ratio:1;border-radius:50%;box-shadow:0 10px 40px rgba(220,20,60,.45);animation:bob 1s ease-in-out infinite alternate}
 @keyframes bob{to{transform:translateY(-10px) rotate(-3deg)}}
 .bar{width:70%;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:99px;animation:fill 2.4s ease-out forwards}
+.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:99px;animation:fill 7s ease-out forwards}
 @keyframes fill{to{width:100%}}
 .err{color:var(--gold);text-align:center;font-weight:700;min-height:1em;margin:0}
 </style>
@@ -329,44 +330,44 @@ const HINTS = {
   'Ice Cream':'Chiso mitho','Chocolate':'Khairo mitho','Pool':'Pani ma tairine thau','Moon':'Rati ko ujyalo','Fire':'Taato ra rato'
 };
 const DARES = [
-  ['Rajesh Hamal ko style ma "Shankar hu ma Shankar" bhana','राजेश हमालको स्टाइलमा "शंकर हुँ म शंकर" भन'],
-  ['Ek line Lok Dohori gau','एक लाइन लोक दोहोरी गाऊ'],['Conductor Dai jasto "Kalanki Kalanki!" chicha','कन्डक्टर दाइ जस्तै "कलंकी कलंकी!" चिच्याऊ'],
-  ['Resham Firiri ma 10 second nacha','रेशम फिरिरिमा १० सेकेन्ड नाच'],['Aafno crush ko naam ko first letter bhana','आफ्नो क्रसको नामको पहिलो अक्षर भन'],
-  ['Mamu le gali gareko nakkal gara','मामुले गाली गरेको नक्कल गर'],['Balen jasto chasma lagaera 5 second pose deu','बालेन जस्तै चस्मा लगाएर ५ सेकेन्ड पोज देऊ'],
-  ['Neta jasto 15 second bhashan deu','नेता जस्तै १५ सेकेन्ड भाषण देऊ'],['Aafno last search history bhana','आफ्नो पछिल्लो सर्च हिस्ट्री भन'],
-  ['TikTok trend ko dance gara','टिकटक ट्रेन्डको डान्स गर'],['Sabai lai ek ek "Gajab chha baje" bhana','सबैलाई एक एक "गजब छ बाजे" भन'],
-  ['Relative jasto "Padhai kasto chha? Bihe kahile?" sodha','आफन्त जस्तै "पढाइ कस्तो छ? बिहे कहिले?" सोध'],
-  ['Momo order garne jasto mime gara','मोमो अर्डर गर्ने जस्तो अभिनय गर'],['Next round pani timi le nai suru gara','अर्को राउन्ड पनि तिमीले नै सुरु गर'],
-  ['Dhurmus ko awaj ma bola','धुर्मुसको आवाजमा बोल'],['Aafno aura score bhana ra justify gara','आफ्नो अउरा स्कोर भन र प्रमाणित गर'],
-  ['Shah Rukh jasto haat failaera pose deu','शाहरुख जस्तै हात फैलाएर पोज देऊ'],['Pushpa jasto daari musara: "Jhukega nahi!"','पुष्पा जस्तै दाह्री मुसार: "झुकेगा नहीं!"'],
-  ['Slow motion ma hidera entry gara','स्लो मोसनमा हिँडेर इन्ट्री गर'],['15 second English ma bhashan deu','१५ सेकेन्ड अङ्ग्रेजीमा भाषण देऊ'],
-  ['Jethalal jasto "Nonsense!" bhana','जेठालाल जस्तै "नन्सेन्स!" भन']
+  ['Rajesh Hamal ko style ma "Shankar hu ma Shankar" bhannuhos','राजेश हमालको स्टाइलमा "शंकर हुँ म शंकर" भन्नुहोस्'],
+  ['Ek line Lok Dohori gaunuhos','एक लाइन लोक दोहोरी गाउनुहोस्'],['Conductor Dai jasto "Kalanki Kalanki!" chichyaunuhos','कन्डक्टर दाइ जस्तै "कलंकी कलंकी!" चिच्याउनुहोस्'],
+  ['Resham Firiri ma 10 second nachnuhos','रेशम फिरिरिमा १० सेकेन्ड नाच्नुहोस्'],['Aafno crush ko naam ko first letter bhannuhos','आफ्नो क्रसको नामको पहिलो अक्षर भन्नुहोस्'],
+  ['Mamu le gali gareko nakkal garnuhos','मामुले गाली गरेको नक्कल गर्नुहोस्'],['Balen jasto chasma lagaera 5 second pose dinuhos','बालेन जस्तै चस्मा लगाएर ५ सेकेन्ड पोज दिनुहोस्'],
+  ['Neta jasto 15 second bhashan dinuhos','नेता जस्तै १५ सेकेन्ड भाषण दिनुहोस्'],['Aafno last search history bhannuhos','आफ्नो पछिल्लो सर्च हिस्ट्री भन्नुहोस्'],
+  ['TikTok trend ko dance garnuhos','टिकटक ट्रेन्डको डान्स गर्नुहोस्'],['Sabai lai ek ek "Gajab chha baje" bhannuhos','सबैलाई एक एक "गजब छ बाजे" भन्नुहोस्'],
+  ['Relative jasto "Padhai kasto chha? Bihe kahile?" sodhnuhos','आफन्त जस्तै "पढाइ कस्तो छ? बिहे कहिले?" सोध्नुहोस्'],
+  ['Momo order garne jasto mime garnuhos','मोमो अर्डर गर्ने जस्तो अभिनय गर्नुहोस्'],['Next round pani tapai le nai suru garnuhos','अर्को राउन्ड पनि तपाईंले नै सुरु गर्नुहोस्'],
+  ['Dhurmus ko awaj ma bolnuhos','धुर्मुसको आवाजमा बोल्नुहोस्'],['Aafno aura score bhannuhos ra justify garnuhos','आफ्नो अउरा स्कोर भन्नुहोस् र प्रमाणित गर्नुहोस्'],
+  ['Shah Rukh jasto haat failaera pose dinuhos','शाहरुख जस्तै हात फैलाएर पोज दिनुहोस्'],['Pushpa jasto daari musarnuhos: "Jhukega nahi!"','पुष्पा जस्तै दाह्री मुसार्नुहोस्: "झुकेगा नहीं!"'],
+  ['Slow motion ma hidera entry garnuhos','स्लो मोसनमा हिँडेर इन्ट्री गर्नुहोस्'],['15 second English ma bhashan dinuhos','१५ सेकेन्ड अङ्ग्रेजीमा भाषण दिनुहोस्'],
+  ['Jethalal jasto "Nonsense!" bhannuhos','जेठालाल जस्तै "नन्सेन्स!" भन्नुहोस्']
 ];
 const T = {
   title:['Imposter <span>Ko Ho?</span>','इम्पोस्टर <span>को हो?</span>'],
-  tag:['Sathi haru sanga khela, imposter lai chin!','साथीहरूसँग खेल, इम्पोस्टरलाई चिन!'],
+  tag:['Sathi haru sanga khelnuhos, imposter lai chinnuhos!','साथीहरूसँग खेल्नुहोस्, इम्पोस्टरलाई चिन्नुहोस्!'],
   players:['Kheladi','खेलाडी'], imps:['Imposter','इम्पोस्टर'], time:['Samaya (min)','समय (मिनेट)'],
-  cats:['Bishaya','विषय'], names:['Kheladi ko naam','खेलाडीको नाम'], hint:['Imposter lai bishaya dekhau','इम्पोस्टरलाई विषय देखाऊ'], clue:['Imposter lai close hint deu','इम्पोस्टरलाई नजिकको हिन्ट देऊ'], cl:['Hint','हिन्ट'],
-  start:['Khel Suru Gara','खेल सुरु गर'], pick:['Kamti ma ek bishaya chhana!','कम्तीमा एउटा विषय छान!'],
-  p:['Kheladi','खेलाडी'], pass:['Phone {n} lai deu','फोन {n}लाई देऊ'], tap:['Herna thich','हेर्न थिच'],
-  only:['Aru le naherun hai! 👀','अरूले नहेरून् है! 👀'], your:['Timro shabda','तिम्रो शब्द'],
-  you:['Timi Imposter Hau!','तिमी इम्पोस्टर हौ!'], blend:['Kasaile thaha napaos 🤫','कसैले थाहा नपाओस् 🤫'],
-  cat:['Bishaya','विषय'], next:['Lukau ra arko lai deu','लुकाऊ र अर्कोलाई देऊ'], done:['Sabai le heryo, chhalfal suru!','सबैले हेरे, छलफल सुरु!'],
-  disc:['Chhalfal','छलफल'], first:['{n} le suru gara','{n}ले सुरु गर'],
-  help:['Palo palo shabda ko bare ek kura bhana. Imposter lai chin!','पालैपालो शब्दबारे एउटा कुरा भन। इम्पोस्टरलाई चिन!'],
-  up:['Samaya sakiyo! Vote gara 🗳️','समय सकियो! भोट गर 🗳️'], vote:['Vote bhayo, Imposter Dekhau','भोट भयो, इम्पोस्टर देखाऊ'],
+  cats:['Bishaya','विषय'], names:['Kheladi ko naam','खेलाडीको नाम'], hint:['Imposter lai bishaya dekhaunuhos','इम्पोस्टरलाई विषय देखाउनुहोस्'], clue:['Imposter lai close hint dinuhos','इम्पोस्टरलाई नजिकको हिन्ट दिनुहोस्'], cl:['Hint','हिन्ट'],
+  start:['Khel Suru Garnuhos','खेल सुरु गर्नुहोस्'], pick:['Kamti ma ek bishaya chhannuhos!','कम्तीमा एउटा विषय छान्नुहोस्!'],
+  p:['Kheladi','खेलाडी'], pass:['Phone {n} lai dinuhos','फोन {n}लाई दिनुहोस्'], tap:['Herna thichirakhnuhos','हेर्न थिचिराख्नुहोस्'], seen:['Herisaknu bhayo ✓','हेरिसक्नुभयो ✓'],
+  only:['Aru le naherun hai! 👀','अरूले नहेरून् है! 👀'], your:['Tapai ko shabda','तपाईंको शब्द'],
+  you:['Tapai Imposter Hunuhunchha!','तपाईं इम्पोस्टर हुनुहुन्छ!'], blend:['Kasaile thaha napaos 🤫','कसैले थाहा नपाओस् 🤫'],
+  cat:['Bishaya','विषय'], next:['Lukaunuhos ra arko lai dinuhos','लुकाउनुहोस् र अर्कोलाई दिनुहोस्'], done:['Sabai le heryo, chhalfal suru!','सबैले हेरे, छलफल सुरु!'],
+  disc:['Chhalfal','छलफल'], first:['{n} le suru garnuhos','{n}ले सुरु गर्नुहोस्'],
+  help:['Palo palo shabda ko bare ek kura bhannuhos. Imposter lai chinnuhos!','पालैपालो शब्दबारे एउटा कुरा भन्नुहोस्। इम्पोस्टरलाई चिन्नुहोस्!'],
+  up:['Samaya sakiyo! Vote garnuhos 🗳️','समय सकियो! भोट गर्नुहोस् 🗳️'], vote:['Vote bhayo, Imposter Dekhaunuhos','भोट भयो, इम्पोस्टर देखाउनुहोस्'],
   was:['Imposter thiyo','इम्पोस्टर थियो'], word:['Shabda thiyo','शब्द थियो'],
-  under:['Undercover mode (imposter lai arkai shabda)','अन्डरकभर मोड (इम्पोस्टरलाई अर्कै शब्द)'], all:['Sabai','सबै'],
+  under:['Undercover mode (imposter lai arkai shabda)','अन्डरकभर मोड (इम्पोस्टरलाई अर्कै शब्द)'], all:['Sabai','सबै'], nextpg:['Arko','अर्को'], back:['Pachhadi','पछाडि'], setup:['Khel Milaunuhos','खेल मिलाउनुहोस्'],
   dare:['Haarne lai sajaya','हार्नेलाई सजाय'],
   load:[['Imposter khojdai...','इम्पोस्टर खोज्दै...'],['Shabda milaudai...','शब्द मिलाउँदै...'],['Chiya pakdai...','चिया पाक्दै...'],['Popcorn tayar gardai...','पपकर्न तयार गर्दै...']],
-  again:['Feri Khela','फेरि खेल'], home:['Suru ma Ja','सुरुमा जाऊ'], quit:['Khel chhodne?','खेल छोड्ने?']
+  again:['Feri Khelnuhos','फेरि खेल्नुहोस्'], home:['Suru ma Jaanuhos','सुरुमा जानुहोस्'], quit:['Khel chhodnuhunchha?','खेल छोड्नुहुन्छ?']
 };
 const store = { get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
-const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[],hint:true,clue:true,under:false,theme:'dark'}, store.get('cfg',{}));
+const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[],hint:true,clue:true,under:false}, store.get('cfg',{}));
 // auto-select categories added since the last launch
 S.cats = [...new Set([...S.cats.filter(k => CATS[k]), ...Object.keys(CATS).filter(k => !(S.seen||[]).includes(k))])];
 S.seen = Object.keys(CATS);
-let G = null, tick = null;
+let G = null, tick = null, pg = 1;
 const intro = new Audio('intro.mp3');
 const app = document.getElementById('app');
 const t = (k,n) => T[k][S.lang].replace('{n}', n);
@@ -377,7 +378,6 @@ const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','
 const save = () => store.set('cfg', S);
 const rnd = n => Math.floor(Math.random()*n);
 const buzz = ms => navigator.vibrate && navigator.vibrate(ms);
-const theme = () => { document.documentElement.dataset.theme = S.theme; window.Android && Android.theme(S.theme==='light'); };
 
 // Weighted pick: seats that were imposter recently are less likely (weight = rounds since, capped at 4).
 function pickImps(){
@@ -393,46 +393,62 @@ function pickImps(){
 
 function splash(){
   app.innerHTML = `<div id="splash"><img class="logo" src="logo.jpeg" alt="Imposter Ko Ho?"><div class="bar"><i></i></div><p class="sub">${L(T.load[rnd(T.load.length)])}</p></div>`;
-  intro.play().catch(() => {});
-  setTimeout(() => { document.getElementById('splash').style.opacity = 0; setTimeout(() => home(), 400); }, 2500);
+  let done = false;
+  const go = () => { if (done) return; done = true; app.onclick = null; intro.pause(); document.getElementById('splash').style.opacity = 0; setTimeout(() => home(), 400); };
+  intro.onended = go; app.onclick = go; // tap to skip
+  intro.play().then(() => setTimeout(go, 7500), () => setTimeout(go, 2500));
 }
 
-function home(err=''){
-  clearInterval(tick); G = null;
+// Page 1: players, imposters, names. Page 2: categories, time, options.
+function stepper(k, lim, page){
+  app.querySelector(`[data-s="${k}"]`).onclick = e => {
+    const d = +e.target.dataset.d; if (!d) return;
+    S[k] = Math.min(lim[1], Math.max(lim[0], S[k]+d)); save(); page();
+  };
+}
+const stepRow = (k, label) => `<div class="row">${label}<div class="step" data-s="${k}"><button data-d="-1">−</button><b>${S[k]}</b><button data-d="1">+</button></div></div>`;
+const steps = n => `<div class="dots">${[1,2].map(k=>`<span class="${k<=n?'on':''}"></span>`).join('')}</div>`;
+
+function home(){
+  clearInterval(tick); G = null; pg = 1;
   const maxImp = Math.max(1, Math.floor((S.n-1)/2));
   S.imp = Math.min(S.imp, maxImp);
   app.innerHTML = `
-  <div class="top"><button class="seg-b" id="th">${S.theme==='light'?'🌙 Dark':'☀️ White'}</button><div class="seg"><button data-l="0" class="${S.lang?'':'on'}">Roman</button><button data-l="1" class="${S.lang?'on':''}">नेपाली</button></div></div>
+  <div class="top">${steps(1)}<div class="seg"><button data-l="0" class="${S.lang?'':'on'}">Roman</button><button data-l="1" class="${S.lang?'on':''}">नेपाली</button></div></div>
   <h1>${t('title')}</h1><p class="sub">${t('tag')}</p>
+  <div class="box">${stepRow('n', '👥 '+t('players'))}${stepRow('imp', '🕵️ '+t('imps'))}</div>
+  <h2>${t('names')}</h2>
+  <div class="names">${Array.from({length:S.n},(_,i)=>`<input data-i="${i}" maxlength="14" placeholder="${t('p')} ${i+1}" value="${esc(S.names[i]||'')}">`).join('')}</div>
+  <button class="btn alt" id="go">${t('nextpg')} ▶</button>`;
+  app.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{S.lang=+b.dataset.l;save();home()});
+  stepper('n', [3,15], home); stepper('imp', [1,maxImp], home);
+  app.querySelectorAll('[data-i]').forEach(inp=>inp.oninput=()=>{S.names[+inp.dataset.i]=inp.value;save()});
+  document.getElementById('go').onclick = () => setup();
+}
+
+function setup(err=''){
+  pg = 2;
+  app.innerHTML = `
+  <div class="top"><button class="seg-b" id="bk">◀ ${t('back')}</button>${steps(2)}</div>
+  <h1>${t('setup')}</h1><p class="sub">👥 ${S.n} · 🕵️ ${S.imp}</p>
+  <div class="row"><h2>${t('cats')}</h2><button class="seg-b" id="all">${t('all')} ✓</button></div>
+  <div class="chips">${Object.entries(CATS).map(([k,c])=>`<button class="chip ${S.cats.includes(k)?'on':''}" data-c="${k}"><i>${c.i}</i>${L(c.n)}</button>`).join('')}</div>
   <div class="box">
-    <div class="row">${t('players')}<div class="step"><button data-s="n,-1">−</button><b>${S.n}</b><button data-s="n,1">+</button></div></div>
-    <div class="row">${t('imps')}<div class="step"><button data-s="imp,-1">−</button><b>${S.imp}</b><button data-s="imp,1">+</button></div></div>
-    <div class="row">${t('time')}<div class="step"><button data-s="time,-1">−</button><b>${S.time}</b><button data-s="time,1">+</button></div></div>
+    ${stepRow('time', '⏱️ '+t('time'))}
     <label class="tog">${t('hint')}<input type="checkbox" id="hint" ${S.hint?'checked':''}></label>
     <label class="tog">${t('clue')}<input type="checkbox" id="clue" ${S.clue?'checked':''}></label>
     <label class="tog">${t('under')}<input type="checkbox" id="under" ${S.under?'checked':''}></label>
   </div>
-  <div class="row"><h2>${t('cats')}</h2><button class="seg-b" id="all">${t('all')} ✓</button></div>
-  <div class="chips">${Object.entries(CATS).map(([k,c])=>`<button class="chip ${S.cats.includes(k)?'on':''}" data-c="${k}"><i>${c.i}</i>${L(c.n)}</button>`).join('')}</div>
-  <h2>${t('names')}</h2>
-  <div class="names">${Array.from({length:S.n},(_,i)=>`<input data-i="${i}" maxlength="14" placeholder="${t('p')} ${i+1}" value="${esc(S.names[i]||'')}">`).join('')}</div>
   <p class="err">${err}</p>
   <button class="btn" id="go">${t('start')} ▶</button>`;
-  app.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{S.lang=+b.dataset.l;save();home()});
-  app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{
-    const [k,d]=b.dataset.s.split(','); const lim={n:[3,15],imp:[1,maxImp],time:[1,10]}[k];
-    S[k]=Math.min(lim[1],Math.max(lim[0],S[k]+ +d)); save(); home();
-  });
+  stepper('time', [1,10], setup);
   app.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{
     const k=b.dataset.c; S.cats=S.cats.includes(k)?S.cats.filter(x=>x!==k):[...S.cats,k]; save(); b.classList.toggle('on');
   });
-  app.querySelectorAll('[data-i]').forEach(inp=>inp.oninput=()=>{S.names[+inp.dataset.i]=inp.value;save()});
-  document.getElementById('th').onclick=()=>{S.theme=S.theme==='light'?'dark':'light';save();theme();home()};
-  document.getElementById('hint').onchange=e=>{S.hint=e.target.checked;save()};
-  document.getElementById('clue').onchange=e=>{S.clue=e.target.checked;save()};
-  document.getElementById('under').onchange=e=>{S.under=e.target.checked;save()};
-  document.getElementById('all').onclick=()=>{S.cats=S.cats.length===Object.keys(CATS).length?[]:Object.keys(CATS);save();home()};
-  document.getElementById('go').onclick=()=>S.cats.length?newRound():home(t('pick'));
+  ['hint','clue','under'].forEach(k=>document.getElementById(k).onchange=e=>{S[k]=e.target.checked;save()});
+  document.getElementById('all').onclick=()=>{S.cats=S.cats.length===Object.keys(CATS).length?[]:Object.keys(CATS);save();setup()};
+  document.getElementById('bk').onclick = () => home();
+  document.getElementById('go').onclick=()=>S.cats.length?newRound():setup(t('pick'));
 }
 
 function newRound(){
@@ -454,7 +470,7 @@ function reveal(){
   <div class="grow">
     <p class="big">${t('pass', esc(nameOf(i)))}</p>
     <div class="flip" id="card"><div>
-      <div class="face front"><div class="q">❓</div><b style="font-size:22px">${t('tap')}</b><span class="sub">${t('only')}</span></div>
+      <div class="face front"><div class="q">❓</div><b style="font-size:22px" id="lb">${t('tap')}</b><span class="sub">${t('only')}</span></div>
       <div class="face back ${isImp?'imp':''}">${isImp
         ? `<div style="font-size:70px">🕵️</div><div class="word">${t('you')}</div>${S.hint?`<span class="pill">${t('cat')}: ${G.cat.i} ${L(G.cat.n)}</span>`:''}${S.clue&&HINTS[G.word[0]]?`<span class="pill" style="background:var(--gold);color:#000">💡 ${t('cl')}: ${HINTS[G.word[0]]}</span>`:''}<span class="sub">${t('blend')}</span>`
         : `<h2>${t('your')}</h2><div class="word">${L(w)}<small>${other(w)}</small></div><span class="pill">${G.cat.i} ${L(G.cat.n)}</span>`}
@@ -463,8 +479,13 @@ function reveal(){
     <button class="btn alt" id="nx" style="visibility:hidden">${last?t('done'):t('next')}</button>
   </div>`;
   const card = document.getElementById('card'), nx = document.getElementById('nx');
-  card.onclick = () => { card.classList.add('open'); buzz(isImp?[60,60,60]:40); nx.style.visibility='visible'; };
-  nx.onclick = () => { card.classList.remove('open'); nx.style.visibility='hidden'; setTimeout(()=>{ if(last) discuss(); else {G.i++; reveal();} }, 350); };
+  // hold to see, once only: release hides it for good and hands over to the next player
+  let seen = false;
+  card.onpointerdown = e => { if (seen) return; e.preventDefault(); card.classList.add('open'); buzz(isImp?[60,60,60]:40); };
+  const hide = () => { if (seen || !card.classList.contains('open')) return; seen = true; card.classList.remove('open'); document.getElementById('lb').textContent = t('seen'); nx.style.visibility='visible'; };
+  card.onpointerup = card.onpointercancel = card.onpointerleave = hide;
+  card.oncontextmenu = e => e.preventDefault();
+  nx.onclick = () => { if(last) discuss(); else {G.i++; reveal();} };
 }
 
 function discuss(){
@@ -505,8 +526,8 @@ function result(){
 }
 
 // Called by Android back button; return true if handled.
-window.goBack = () => { if(!G) return false; if(confirm(t('quit'))) home(); return true; };
-save(); theme(); splash();
+window.goBack = () => { if(!G){ if(pg===2){ home(); return true; } return false; } if(confirm(t('quit'))) home(); return true; };
+save(); splash();
 </script>
 </body>
 </html>
