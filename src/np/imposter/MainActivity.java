@@ -22,6 +22,7 @@ public class MainActivity extends Activity {
         web.setBackgroundColor(Color.parseColor("#0d0f1f"));
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setDomStorageEnabled(true);
+        web.getSettings().setMediaPlaybackRequiresUserGesture(false); // intro sound on launch
         web.setWebChromeClient(new WebChromeClient()); // enables confirm()
         web.addJavascriptInterface(new Object() {
             @JavascriptInterface public void theme(boolean light) {

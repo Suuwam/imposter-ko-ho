@@ -56,10 +56,10 @@ h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:upper
 .dots span.on{background:var(--red)}
 .seg-b{background:var(--btn);border:1px solid var(--line);color:var(--txt);border-radius:99px;padding:6px 14px;font:inherit;font-weight:700;font-size:14px}
 #splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .4s}
-#splash .logo{font-size:96px;animation:bob 1s ease-in-out infinite alternate}
-@keyframes bob{to{transform:translateY(-14px) rotate(-6deg)}}
+#splash .logo{width:min(72vw,320px);aspect-ratio:1;border-radius:50%;box-shadow:0 10px 40px rgba(220,20,60,.45);animation:bob 1s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-10px) rotate(-3deg)}}
 .bar{width:70%;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:99px;animation:fill 1.4s ease-out forwards}
+.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:99px;animation:fill 2.4s ease-out forwards}
 @keyframes fill{to{width:100%}}
 .err{color:var(--gold);text-align:center;font-weight:700;min-height:1em;margin:0}
 </style>
@@ -367,6 +367,7 @@ const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[]
 S.cats = [...new Set([...S.cats.filter(k => CATS[k]), ...Object.keys(CATS).filter(k => !(S.seen||[]).includes(k))])];
 S.seen = Object.keys(CATS);
 let G = null, tick = null;
+const intro = new Audio('intro.mp3');
 const app = document.getElementById('app');
 const t = (k,n) => T[k][S.lang].replace('{n}', n);
 const L = pair => pair[S.lang];
@@ -391,8 +392,9 @@ function pickImps(){
 }
 
 function splash(){
-  app.innerHTML = `<div id="splash"><div class="logo">🕵️</div><h1>${t('title')}</h1><div class="bar"><i></i></div><p class="sub">${L(T.load[rnd(T.load.length)])}</p></div>`;
-  setTimeout(() => { document.getElementById('splash').style.opacity = 0; setTimeout(() => home(), 400); }, 1500);
+  app.innerHTML = `<div id="splash"><img class="logo" src="logo.jpeg" alt="Imposter Ko Ho?"><div class="bar"><i></i></div><p class="sub">${L(T.load[rnd(T.load.length)])}</p></div>`;
+  intro.play().catch(() => {});
+  setTimeout(() => { document.getElementById('splash').style.opacity = 0; setTimeout(() => home(), 400); }, 2500);
 }
 
 function home(err=''){
@@ -434,6 +436,7 @@ function home(err=''){
 }
 
 function newRound(){
+  intro.pause();
   const ck = S.cats[rnd(S.cats.length)], cat = CATS[ck];
   const imps = pickImps();
   const used = store.get('used', []).filter(w => cat.w.some(x => x[0]===w));
