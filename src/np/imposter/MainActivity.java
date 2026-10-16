@@ -3,7 +3,9 @@ package np.imposter;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
@@ -21,6 +23,17 @@ public class MainActivity extends Activity {
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setDomStorageEnabled(true);
         web.setWebChromeClient(new WebChromeClient()); // enables confirm()
+        web.addJavascriptInterface(new Object() {
+            @JavascriptInterface public void theme(boolean light) {
+                runOnUiThread(() -> {
+                    int c = Color.parseColor(light ? "#f4f5fb" : "#0d0f1f");
+                    getWindow().setStatusBarColor(c);
+                    getWindow().setNavigationBarColor(c);
+                    web.setBackgroundColor(c);
+                    web.setSystemUiVisibility(light ? View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR : 0);
+                });
+            }
+        }, "Android");
         web.loadUrl("file:///android_asset/index.html");
         setContentView(web);
     }

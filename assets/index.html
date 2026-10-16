@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Imposter Ko Ho?</title>
 <style>
-:root{--bg:#0d0f1f;--card:#181b33;--line:#2a2e52;--red:#dc143c;--blue:#2d5bd8;--txt:#f3f4ff;--mut:#9aa0c7;--gold:#ffc83d}
+:root{--bg:#0d0f1f;--card:#181b33;--line:#2a2e52;--red:#dc143c;--blue:#2d5bd8;--txt:#f3f4ff;--mut:#9aa0c7;--gold:#ffc83d;--btn:#22264a;--chip:#1f2343;--inp:#11132a;--chipon:#3a1426;--f1:#1b1f3d;--f2:#20244a}
+[data-theme=light]{--bg:#f4f5fb;--card:#fff;--line:#d9dcef;--txt:#14162e;--mut:#5d6290;--gold:#a86e00;--btn:#eceefa;--chip:#f7f8fe;--inp:#fff;--chipon:#ffe3ea;--f1:#e6e9fb;--f2:#dde1f8}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--txt);font-family:system-ui,"Noto Sans Devanagari",sans-serif}
 #app{min-height:100%;max-width:520px;margin:0 auto;padding:20px 16px 28px;display:flex;flex-direction:column;gap:16px}
@@ -13,21 +14,21 @@ h1{margin:4px 0 0;font-size:34px;line-height:1.1;text-align:center}
 h1 span{color:var(--red)}
 h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .sub{text-align:center;color:var(--mut);margin:0}
-.top{display:flex;justify-content:flex-end}
+.top{display:flex;justify-content:space-between;align-items:center}
 .seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:3px}
 .seg button{background:none;border:0;color:var(--mut);padding:8px 14px;border-radius:99px;font:inherit;font-weight:700}
 .seg button.on{background:var(--red);color:#fff}
 .box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:17px;font-weight:600}
 .step{display:flex;align-items:center;gap:6px}
-.step button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:#22264a;color:var(--txt);font-size:22px;font-weight:700}
+.step button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--btn);color:var(--txt);font-size:22px;font-weight:700}
 .step b{min-width:34px;text-align:center;font-size:22px}
 .chips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.chip{border:2px solid var(--line);background:#1f2343;color:var(--txt);border-radius:14px;padding:14px 10px;font:inherit;font-weight:700;font-size:15px;text-align:left}
+.chip{border:2px solid var(--line);background:var(--chip);color:var(--txt);border-radius:14px;padding:14px 10px;font:inherit;font-weight:700;font-size:15px;text-align:left}
 .chip i{display:block;font-style:normal;font-size:26px;margin-bottom:4px}
-.chip.on{border-color:var(--red);background:#3a1426}
+.chip.on{border-color:var(--red);background:var(--chipon)}
 .names{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.names input{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:#11132a;color:var(--txt);font:inherit;font-size:15px;user-select:text}
+.names input{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--inp);color:var(--txt);font:inherit;font-size:15px;user-select:text}
 .tog{display:flex;align-items:center;justify-content:space-between;font-weight:600}
 .tog input{width:24px;height:24px;accent-color:var(--red)}
 .btn{border:0;border-radius:16px;padding:18px;font:inherit;font-size:19px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--red),#a3102f);box-shadow:0 6px 0 #6d0b20;width:100%}
@@ -40,20 +41,26 @@ h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:upper
 .flip>div{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
 .flip.open>div{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;border:2px solid var(--line)}
-.front{background:repeating-linear-gradient(45deg,#1b1f3d,#1b1f3d 14px,#20244a 14px,#20244a 28px)}
+.front{background:repeating-linear-gradient(45deg,var(--f1),var(--f1) 14px,var(--f2) 14px,var(--f2) 28px)}
 .front .q{font-size:90px}
 .back{transform:rotateY(180deg);background:var(--card)}
-.back.imp{background:radial-gradient(circle at 50% 30%,#5a0d22,#20091a);border-color:var(--red)}
+.back.imp{background:radial-gradient(circle at 50% 30%,#5a0d22,#20091a);border-color:var(--red);color:#fff}
 .word{font-size:36px;font-weight:900;line-height:1.15}
 .word small{display:block;font-size:20px;color:var(--mut);font-weight:700;margin-top:6px}
 .timer{font-size:82px;font-weight:900;font-variant-numeric:tabular-nums}
 .timer.low{color:var(--red)}
-.pill{display:inline-block;background:#22264a;border-radius:99px;padding:8px 14px;font-weight:700;margin:4px}
-.pill.r{background:var(--red)}
+.pill{display:inline-block;background:var(--btn);border-radius:99px;padding:8px 14px;font-weight:700;margin:4px}
+.pill.r{background:var(--red);color:#fff}
 .dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
 .dots span{width:10px;height:10px;border-radius:50%;background:var(--line)}
 .dots span.on{background:var(--red)}
-.seg-b{background:#22264a;border:1px solid var(--line);color:var(--txt);border-radius:99px;padding:6px 14px;font:inherit;font-weight:700;font-size:14px}
+.seg-b{background:var(--btn);border:1px solid var(--line);color:var(--txt);border-radius:99px;padding:6px 14px;font:inherit;font-weight:700;font-size:14px}
+#splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .4s}
+#splash .logo{font-size:96px;animation:bob 1s ease-in-out infinite alternate}
+@keyframes bob{to{transform:translateY(-14px) rotate(-6deg)}}
+.bar{width:70%;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:99px;animation:fill 1.4s ease-out forwards}
+@keyframes fill{to{width:100%}}
 .err{color:var(--gold);text-align:center;font-weight:700;min-height:1em;margin:0}
 </style>
 </head>
@@ -140,7 +147,52 @@ const CATS = {
     ['Lumbini','लुम्बिनी'],['Sagarmatha','सगरमाथा'],['Chitwan','चितवन'],['Janakpur','जनकपुर'],['Thamel','ठमेल'],['Ratna Park','रत्नपार्क'],
     ['Bhaktapur','भक्तपुर'],['Rara Tal','रारा ताल'],['Mustang','मुस्ताङ'],['Nagarkot','नगरकोट'],['Ilam','इलाम'],['Bandipur','बन्दीपुर'],
     ['Kalanki','कलंकी'],['Gongabu Buspark','गोंगबु बसपार्क'],['Basantapur','बसन्तपुर'],['Durbar Marg','दरबारमार्ग'],['Jhapa','झापा'],
-    ['Dharan','धरान'],['Butwal','बुटवल'],['Birgunj','वीरगञ्ज'],['Tribhuvan Airport','त्रिभुवन विमानस्थल'],['Kalinchowk','कालिञ्चोक']]}
+    ['Dharan','धरान'],['Butwal','बुटवल'],['Birgunj','वीरगञ्ज'],['Tribhuvan Airport','त्रिभुवन विमानस्थल'],['Kalinchowk','कालिञ्चोक']]},
+  hindi: {i:'🤣', n:['Hindi Meme','हिन्दी मिम'], w:[
+    ['Rasode Mein Kaun Tha','रसोड़े में कौन था'],['Binod','बिनोद'],['Jethalal','जेठालाल'],['Babu Bhaiya','बाबू भैया'],['Utha Le Re Baba','उठा ले रे बाबा'],
+    ['Ye Baburao Ka Style Hai','ये बाबूराव का स्टाइल है'],['Paisa Hi Paisa Hoga','पैसा ही पैसा होगा'],['Kehna Kya Chahte Ho','कहना क्या चाहते हो'],
+    ['Moye Moye','मोये मोये'],['Bahut Hard','बहुत हार्ड'],['Elvish Bhai','एल्विश भाई'],['Carry Minati','कैरी मिनाटी'],['Bhuvan Bam','भुवन बाम'],
+    ['Dhinchak Pooja','ढिंचैक पूजा'],['Thappad Se Darr Nahi Lagta','थप्पड़ से डर नहीं लगता'],['Kitne Aadmi The','कितने आदमी थे'],
+    ['Mogambo Khush Hua','मोगैम्बो खुश हुआ'],['Ek Chutki Sindoor','एक चुटकी सिंदूर'],['Mere Karan Arjun Aayenge','मेरे करन अर्जुन आएंगे'],
+    ['All Is Well','ऑल इज वेल'],['Pawri Ho Rahi Hai','पावरी हो रही है'],['Just Looking Like a Wow','जस्ट लुकिंग लाइक अ वाओ'],
+    ['Bigg Boss','बिग बॉस'],['Kapil Sharma Show','कपिल शर्मा शो'],['Taarak Mehta','तारक मेहता'],['Hum Nahi Sudhrenge','हम नहीं सुधरेंगे'],
+    ['Jalwa Hai Hamara','जलवा है हमारा'],['Picture Abhi Baaki Hai','पिक्चर अभी बाकी है'],['Bhai Kya Kar Raha Hai Tu','भाई क्या कर रहा है तू'],
+    ['Ye Dukh Kahe Khatam Nahi Hota','ये दुख काहे खतम नहीं होता']]},
+  bolly: {i:'💃', n:['Bollywood','बलिउड'], w:[
+    ['Shah Rukh Khan','शाहरुख खान'],['Salman Khan','सलमान खान'],['Amitabh Bachchan','अमिताभ बच्चन'],['Ranveer Singh','रणवीर सिंह'],
+    ['Ranbir Kapoor','रणबीर कपूर'],['Kartik Aaryan','कार्तिक आर्यन'],['Alia Bhatt','आलिया भट्ट'],['Deepika Padukone','दीपिका पादुकोण'],
+    ['Katrina Kaif','कटरिना कैफ'],['Akshay Kumar','अक्षय कुमार'],['Aamir Khan','आमिर खान'],['Hrithik Roshan','ऋतिक रोशन'],
+    ['Shraddha Kapoor','श्रद्धा कपूर'],['Sholay','शोले'],['DDLJ','डीडीएलजे'],['3 Idiots','थ्री इडियट्स'],['Hera Pheri','हेरा फेरी'],
+    ['Animal','एनिमल'],['Jawan','जवान'],['Pathaan','पठान'],['Kabir Singh','कबीर सिंह'],['Dhoom','धूम'],['Stree','स्त्री'],['Golmaal','गोलमाल'],
+    ['Welcome','वेलकम'],['Bhool Bhulaiyaa','भूल भुलैया'],['Kabhi Khushi Kabhie Gham','कभी खुशी कभी ग़म'],['Chak De India','चक दे इंडिया'],
+    ['Dangal','दंगल'],['Saiyaara','सैयारा'],['Tauba Tauba','तौबा तौबा'],['Chammak Challo','छम्मक छल्लो']]},
+  south: {i:'🔥', n:['South Movie','साउथ मुभी'], w:[
+    ['Pushpa','पुष्पा'],['Pushpa Jhukega Nahi','पुष्पा झुकेगा नहीं'],['Allu Arjun','अल्लु अर्जुन'],['Prabhas','प्रभास'],['Baahubali','बाहुबली'],
+    ['Katappa ne Baahubali ko Kyu Mara','कटप्पाने बाहुबलीको क्यों मारा'],['KGF','केजीएफ'],['Rocky Bhai','रकी भाई'],['Yash','यश'],['RRR','आरआरआर'],
+    ['Naatu Naatu','नाटु नाटु'],['Rajinikanth','रजनीकान्त'],['Thalapathy Vijay','थलपति विजय'],['Mahesh Babu','महेश बाबु'],['Jr NTR','जुनियर एनटीआर'],
+    ['Ram Charan','राम चरण'],['Rashmika Mandanna','रश्मिका मन्दाना'],['Samantha','सामन्था'],['Vikram','विक्रम'],['Kantara','कान्तारा'],
+    ['Salaar','सलार'],['Jailer','जेलर'],['Robot Chitti','रोबोट चिट्टी'],['Srivalli','श्रीवल्ली'],['Oo Antava','ऊ अन्टावा'],['Lungi Dance','लुङ्गी डान्स'],
+    ['Goldmines Dubbed','गोल्डमाइन्स डब'],['Kanchana','कञ्चना'],['Hindi Dubbed Action','हिन्दी डब एक्सन'],['Slow Motion Entry','स्लो मोसन इन्ट्री']]},
+  holly: {i:'🍿', n:['Hollywood','हलिउड'], w:[
+    ['Avengers','एभेन्जर्स'],['Iron Man','आइरन म्यान'],['Spider-Man','स्पाइडरम्यान'],['Batman','ब्याटम्यान'],['Joker','जोकर'],['Thanos','थानोस'],
+    ['Harry Potter','ह्यारी पोटर'],['Titanic','टाइटानिक'],['Avatar','अवतार'],['Jurassic Park','जुरासिक पार्क'],['Fast and Furious','फास्ट एन्ड फ्युरियस'],
+    ['The Rock','द रक'],['Tom Cruise','टम क्रुज'],['Leonardo DiCaprio','लियोनार्डो डिक्याप्रियो'],['John Wick','जोन विक'],['Barbie','बार्बी'],
+    ['Oppenheimer','ओपनहाइमर'],['Minions','मिनियन्स'],['Frozen','फ्रोजन'],['Stranger Things','स्ट्रेन्जर थिङ्स'],['Game of Thrones','गेम अफ थ्रोन्स'],
+    ['Breaking Bad','ब्रेकिङ ब्याड'],['Mr Bean','मिस्टर बिन'],['Shrek','श्रेक'],['Transformers','ट्रान्सफर्मर्स'],['Star Wars','स्टार वार्स'],
+    ['Jack Sparrow','ज्याक स्प्यारो'],['Deadpool','डेडपुल'],['Wednesday','वेन्सडे'],['Mission Impossible','मिसन इम्पोसिबल'],['Superman','सुपरम्यान'],['Interstellar','इन्टरस्टेलर']]},
+  engnp: {i:'🗣️', n:['Nepali English','नेपाली अङ्ग्रेजी'], w:[
+    ['Setting','सेटिङ'],['Source Force','सोर्स फोर्स'],['Chance','चान्स'],['Recharge','रिचार्ज'],['Data Pack','डाटा प्याक'],['Hotspot','हटस्पट'],
+    ['Ncell','एनसेल'],['NTC','एनटीसी'],['Bike','बाइक'],['Helmet','हेल्मेट'],['Treat','ट्रिट'],['Party','पार्टी'],['Sorry','सरी'],['Full Tight','फुल टाइट'],
+    ['Bus Stop','बस स्टप'],['Hostel','होस्टल'],['Room Rent','रुम रेन्ट'],['Plus Two','प्लस टु'],['Bachelor','ब्याचलर'],['Exam','इक्जाम'],
+    ['Cheating','चिटिङ'],['Bunk','बङ्क'],['Canteen','क्यान्टिन'],['Boyfriend','ब्वाइफ्रेन्ड'],['Girlfriend','गर्लफ्रेन्ड'],['Breakup','ब्रेकअप'],
+    ['Propose','प्रपोज'],['Senti','सेन्टी'],['Overtime','ओभरटाइम'],['Salary','स्यालरी'],['Bonus','बोनस'],['Fresh Hunu','फ्रेस हुनु']]},
+  eng: {i:'🔤', n:['English Words','अङ्ग्रेजी शब्द'], w:[
+    ['Umbrella','छाता'],['Elephant','हात्ती'],['Mirror','ऐना'],['Pillow','सिरानी'],['Toothbrush','दाँत माझ्ने ब्रस'],['Rainbow','इन्द्रेणी'],
+    ['Airplane','हवाईजहाज'],['Hospital','अस्पताल'],['Library','पुस्तकालय'],['Volcano','ज्वालामुखी'],['Penguin','पेंगुइन'],['Pizza','पिज्जा'],
+    ['Birthday','जन्मदिन'],['Wedding','बिहे'],['Ghost','भूत'],['Doctor','डाक्टर'],['Teacher','शिक्षक'],['Police','प्रहरी'],['Guitar','गितार'],
+    ['Camera','क्यामेरा'],['Spider','माकुरो'],['Snake','सर्प'],['Monkey','बाँदर'],['Rocket','रकेट'],['Beach','समुद्री किनार'],['Jungle','जंगल'],
+    ['Pirate','समुद्री डाकु'],['Robot','रोबोट'],['Dinosaur','डाइनोसर'],['Ice Cream','आइसक्रिम'],['Chocolate','चकलेट'],['Swimming','पौडी'],
+    ['Moon','चन्द्रमा'],['Fire','आगो']]}
 };
 const DARES = [
   ['Rajesh Hamal ko style ma "Shankar hu ma Shankar" bhana','राजेश हमालको स्टाइलमा "शंकर हुँ म शंकर" भन'],
@@ -151,7 +203,10 @@ const DARES = [
   ['TikTok trend ko dance gara','टिकटक ट्रेन्डको डान्स गर'],['Sabai lai ek ek "Gajab chha baje" bhana','सबैलाई एक एक "गजब छ बाजे" भन'],
   ['Relative jasto "Padhai kasto chha? Bihe kahile?" sodha','आफन्त जस्तै "पढाइ कस्तो छ? बिहे कहिले?" सोध'],
   ['Momo order garne jasto mime gara','मोमो अर्डर गर्ने जस्तो अभिनय गर'],['Next round pani timi le nai suru gara','अर्को राउन्ड पनि तिमीले नै सुरु गर'],
-  ['Dhurmus ko awaj ma bola','धुर्मुसको आवाजमा बोल'],['Aafno aura score bhana ra justify gara','आफ्नो अउरा स्कोर भन र प्रमाणित गर']
+  ['Dhurmus ko awaj ma bola','धुर्मुसको आवाजमा बोल'],['Aafno aura score bhana ra justify gara','आफ्नो अउरा स्कोर भन र प्रमाणित गर'],
+  ['Shah Rukh jasto haat failaera pose deu','शाहरुख जस्तै हात फैलाएर पोज देऊ'],['Pushpa jasto daari musara: "Jhukega nahi!"','पुष्पा जस्तै दाह्री मुसार: "झुकेगा नहीं!"'],
+  ['Slow motion ma hidera entry gara','स्लो मोसनमा हिँडेर इन्ट्री गर'],['15 second English ma bhashan deu','१५ सेकेन्ड अङ्ग्रेजीमा भाषण देऊ'],
+  ['Jethalal jasto "Nonsense!" bhana','जेठालाल जस्तै "नन्सेन्स!" भन']
 ];
 const T = {
   title:['Imposter <span>Ko Ho?</span>','इम्पोस्टर <span>को हो?</span>'],
@@ -169,11 +224,14 @@ const T = {
   was:['Imposter thiyo','इम्पोस्टर थियो'], word:['Shabda thiyo','शब्द थियो'],
   under:['Undercover mode (imposter lai arkai shabda)','अन्डरकभर मोड (इम्पोस्टरलाई अर्कै शब्द)'], all:['Sabai','सबै'],
   dare:['Haarne lai sajaya','हार्नेलाई सजाय'],
+  load:[['Imposter khojdai...','इम्पोस्टर खोज्दै...'],['Shabda milaudai...','शब्द मिलाउँदै...'],['Chiya pakdai...','चिया पाक्दै...'],['Popcorn tayar gardai...','पपकर्न तयार गर्दै...']],
   again:['Feri Khela','फेरि खेल'], home:['Suru ma Ja','सुरुमा जाऊ'], quit:['Khel chhodne?','खेल छोड्ने?']
 };
 const store = { get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}} };
-const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[],hint:true,under:false}, store.get('cfg',{}));
-S.cats = S.cats.filter(k => CATS[k]);
+const S = Object.assign({lang:0,n:4,imp:1,time:3,cats:Object.keys(CATS),names:[],hint:true,under:false,theme:'dark'}, store.get('cfg',{}));
+// auto-select categories added since the last launch
+S.cats = [...new Set([...S.cats.filter(k => CATS[k]), ...Object.keys(CATS).filter(k => !(S.seen||[]).includes(k))])];
+S.seen = Object.keys(CATS);
 let G = null, tick = null;
 const app = document.getElementById('app');
 const t = (k,n) => T[k][S.lang].replace('{n}', n);
@@ -184,13 +242,31 @@ const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','
 const save = () => store.set('cfg', S);
 const rnd = n => Math.floor(Math.random()*n);
 const buzz = ms => navigator.vibrate && navigator.vibrate(ms);
+const theme = () => { document.documentElement.dataset.theme = S.theme; window.Android && Android.theme(S.theme==='light'); };
+
+// Weighted pick: seats that were imposter recently are less likely (weight = rounds since, capped at 4).
+function pickImps(){
+  const since = store.get('since', []), imps = new Set(), age = i => since[i] ?? 4;
+  while (imps.size < S.imp) {
+    const w = Array.from({length:S.n}, (_,i) => imps.has(i) ? 0 : Math.min(age(i), 4));
+    let r = Math.random() * w.reduce((a,b) => a+b), k = w.findIndex(x => (r -= x) < 0);
+    imps.add(k < 0 ? w.findLastIndex(x => x > 0) : k);
+  }
+  store.set('since', Array.from({length:S.n}, (_,i) => imps.has(i) ? 1 : age(i)+1));
+  return imps;
+}
+
+function splash(){
+  app.innerHTML = `<div id="splash"><div class="logo">🕵️</div><h1>${t('title')}</h1><div class="bar"><i></i></div><p class="sub">${L(T.load[rnd(T.load.length)])}</p></div>`;
+  setTimeout(() => { document.getElementById('splash').style.opacity = 0; setTimeout(() => home(), 400); }, 1500);
+}
 
 function home(err=''){
   clearInterval(tick); G = null;
   const maxImp = Math.max(1, Math.floor((S.n-1)/2));
   S.imp = Math.min(S.imp, maxImp);
   app.innerHTML = `
-  <div class="top"><div class="seg"><button data-l="0" class="${S.lang?'':'on'}">Roman</button><button data-l="1" class="${S.lang?'on':''}">नेपाली</button></div></div>
+  <div class="top"><button class="seg-b" id="th">${S.theme==='light'?'🌙 Dark':'☀️ White'}</button><div class="seg"><button data-l="0" class="${S.lang?'':'on'}">Roman</button><button data-l="1" class="${S.lang?'on':''}">नेपाली</button></div></div>
   <h1>${t('title')}</h1><p class="sub">${t('tag')}</p>
   <div class="box">
     <div class="row">${t('players')}<div class="step"><button data-s="n,-1">−</button><b>${S.n}</b><button data-s="n,1">+</button></div></div>
@@ -214,6 +290,7 @@ function home(err=''){
     const k=b.dataset.c; S.cats=S.cats.includes(k)?S.cats.filter(x=>x!==k):[...S.cats,k]; save(); b.classList.toggle('on');
   });
   app.querySelectorAll('[data-i]').forEach(inp=>inp.oninput=()=>{S.names[+inp.dataset.i]=inp.value;save()});
+  document.getElementById('th').onclick=()=>{S.theme=S.theme==='light'?'dark':'light';save();theme();home()};
   document.getElementById('hint').onchange=e=>{S.hint=e.target.checked;save()};
   document.getElementById('under').onchange=e=>{S.under=e.target.checked;save()};
   document.getElementById('all').onclick=()=>{S.cats=S.cats.length===Object.keys(CATS).length?[]:Object.keys(CATS);save();home()};
@@ -222,7 +299,7 @@ function home(err=''){
 
 function newRound(){
   const ck = S.cats[rnd(S.cats.length)], cat = CATS[ck];
-  const imps = new Set(); while(imps.size<S.imp) imps.add(rnd(S.n));
+  const imps = pickImps();
   const used = store.get('used', []).filter(w => cat.w.some(x => x[0]===w));
   let pool = cat.w.filter(x => !used.includes(x[0])); if (!pool.length) { pool = cat.w; used.length = 0; }
   const word = pool[rnd(pool.length)]; used.push(word[0]); store.set('used', used.slice(-200));
@@ -290,7 +367,7 @@ function result(){
 
 // Called by Android back button; return true if handled.
 window.goBack = () => { if(!G) return false; if(confirm(t('quit'))) home(); return true; };
-home();
+save(); theme(); splash();
 </script>
 </body>
 </html>
