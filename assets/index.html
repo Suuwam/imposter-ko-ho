@@ -70,15 +70,15 @@ h2{margin:0;font-size:15px;color:var(--mut);font-weight:600;text-transform:upper
 // [romanized, devanagari]
 const CATS = {
   meme: {i:'😂', n:['Meme Dialogue','मिम डायलग'], w:[
-    ['Gajab','गजब'],['Ke Garne','के गर्ने'],['Babal','बबाल'],
-    ['Chhya!','छ्या!'],['Hait!','हैट!'],['Lau','लौ'],['Ambani','अम्बानी'],
-    ['Aura','अउरा'],['Jhyau','झ्याउ'],['Majja','मज्जा'],
-    ['Nepali Time','नेपाली टाइम'],['Ekchhin','एकछिन'],['Milaidinu','मिलाइदिनु'],
+    
+    ['Ambani','अम्बानी'],
+    ['Aura','अउरा'],['Majja','मज्जा'],
+    ['Nepali Time','नेपाली टाइम'],
     ['Bihe','बिहे'],
-    ['Password','पासवर्ड'],['Kangal','कंगाल'],
+    ['Password','पासवर्ड'],
     ['Tension','टेन्सन'],['Chuna','चुना'],
-    ['Sanchai','सन्चै'],
-    ['Thug Life','ठग लाइफ'],]},
+    
+    ['Thug Life','ठग लाइफ'],['Hawa Guff','हावा गफ'],['Chamcha','चम्चा'],['Jugaad','जुगाड'],['Nautanki','नौटंकी'],['Kulman','कुलमान'],]},
   celeb: {i:'😎', n:['Celeb ra Star','सेलेब र स्टार'], w:[
     ['Rajesh Hamal','राजेश हमाल'],['Mahanayak','महानायक'],['Dhurmus','धुर्मुस'],['Suntali','सुन्तली'],['Madan Krishna','मदनकृष्ण'],
     ['Hari Bansha','हरिवंश'],['Magne Buda','मग्ने बुढा'],
@@ -90,9 +90,9 @@ const CATS = {
   genz: {i:'📱', n:['Gen Z ra Internet','जेन जी र इन्टरनेट'], w:[
     ['Nepo Kids','नेपो किड्स'],['Gen Z','जेन जी'],['Discord','डिस्कर्ड'],
     ['One Piece','वान पिस'],['VPN','भीपीएन'],
-    ['TikTok','टिकटक'],['Reels','रिल्स'],['Live','लाइभ'],['Seenzone','सिनजोन'],['Blue Tick','ब्लु टिक'],
-    ['Rizz','रिज'],['Brainrot','ब्रेनरट'],['Sigma','सिग्मा'],['NPC','एनपीसी'],['Delulu','डेलुलु'],['Crush','क्रस'],
-    ['Situationship','सिचुएसनसिप'],['Hashtag','ह्यासट्याग'],['Viral','भाइरल'],['Free Fire','फ्री फायर'],['PUBG','पबजी'],
+    ['TikTok','टिकटक'],['Reels','रिल्स'],['Livestream','लाइभस्ट्रिम'],['Seenzone','सिनजोन'],['Blue Tick','ब्लु टिक'],
+    ['Rizz','रिज'],['Brainrot','ब्रेनरट'],['Sigma','सिग्मा'],['NPC','एनपीसी'],['Crush','क्रस'],
+    ['Situationship','सिचुएसनसिप'],['Hashtag','ह्यासट्याग'],['Free Fire','फ्री फायर'],['PUBG','पबजी'],
     ['Ludo','लुडो'],['Zoom','जुम'],['Story','स्टोरी'],['Netflix','नेटफ्लिक्स'],
     ['Chasma','चस्मा'],['Rap','र्‍याप']]},
   neta: {i:'🗳️', n:['Neta ra Chunab','नेता र चुनाव'], w:[
@@ -127,7 +127,7 @@ const CATS = {
     ['Chappal','चप्पल'],['Dhara','धारा'],['Kirana','किराना'],['Udhaaro','उधारो'],['Bhauju','भाउजू'],['Sasurali','ससुराली'],
     ['Relative','आफन्त'],['eSewa','इसेवा'],['Khalti','खल्ती'],['Loksewa','लोकसेवा'],['SEE','एसईई'],
     ['IELTS','आइईएलटीएस'],['Australia','अस्ट्रेलिया'],['Korea','कोरिया'],['Qatar','कतार'],
-    ['Japan','जापान'],['Sarkari','सरकारी'],['Malpot','मालपोत'],['Buspark','बसपार्क'],['Khaldo','खाल्डो'],
+    ['Japan','जापान'],['Malpot','मालपोत'],['Buspark','बसपार्क'],['Khaldo','खाल्डो'],
     ['Dhulo','धुलो'],['Tuition','ट्युसन']]},
   trad: {i:'🪔', n:['Paramparagat','परम्परागत'], w:[
     ['Dashain','दशैं'],['Tihar','तिहार'],['Teej','तीज'],['Chhath','छठ'],['Holi','होली'],['Gai Jatra','गाईजात्रा'],['Indra Jatra','इन्द्रजात्रा'],
@@ -151,10 +151,10 @@ const CATS = {
   hindi: {i:'🤣', n:['Hindi Meme','हिन्दी मिम'], w:[
     ['Rasoda','रसोड़ा'],['Binod','बिनोद'],['Jethalal','जेठालाल'],['Babu Bhaiya','बाबू भैया'],
     
-    ['Moye Moye','मोये मोये'],['Bahut Hard','बहुत हार्ड'],['Elvish','एल्विश'],['CarryMinati','कैरीमिनाटी'],['Bhuvan Bam','भुवन बाम'],
+    ['Moye Moye','मोये मोये'],['Elvish','एल्विश'],['CarryMinati','कैरीमिनाटी'],['Bhuvan Bam','भुवन बाम'],
     ['Dhinchak Pooja','ढिंचैक पूजा'],['Thappad','थप्पड़'],['Gabbar','गब्बर'],
     ['Mogambo','मोगैम्बो'],['Sindoor','सिंदूर'],['Karan Arjun','करन अर्जुन'],
-    ['All Is Well','ऑल इज वेल'],['Pawri','पावरी'],['Wow','वाओ'],
+    ['Pawri','पावरी'],
     ['Bigg Boss','बिग बॉस'],['Kapil Sharma','कपिल शर्मा'],['Taarak Mehta','तारक मेहता'],
     ['Jalwa','जलवा'],
     ['Dukh','दुख']]},
@@ -172,7 +172,7 @@ const CATS = {
     ['Naatu Naatu','नाटु नाटु'],['Rajinikanth','रजनीकान्त'],['Vijay','विजय'],['Mahesh Babu','महेश बाबु'],['NTR','एनटीआर'],
     ['Ram Charan','राम चरण'],['Rashmika','रश्मिका'],['Samantha','सामन्था'],['Kantara','कान्तारा'],
     ['Salaar','सलार'],['Jailer','जेलर'],['Chitti','चिट्टी'],['Srivalli','श्रीवल्ली'],['Oo Antava','ऊ अन्टावा'],['Lungi','लुङ्गी'],
-    ['Goldmines','गोल्डमाइन्स'],['Dubbed','डब्ड'],['Slow Motion','स्लो मोसन']]},
+    ['Goldmines','गोल्डमाइन्स'],['Slow Motion','स्लो मोसन']]},
   holly: {i:'🍿', n:['Hollywood','हलिउड'], w:[
     ['Avengers','एभेन्जर्स'],['Ironman','आइरनम्यान'],['Spider-Man','स्पाइडरम्यान'],['Batman','ब्याटम्यान'],['Joker','जोकर'],['Thanos','थानोस'],
     ['Harry Potter','ह्यारी पोटर'],['Titanic','टाइटानिक'],['Avatar','अवतार'],['Jurassic Park','जुरासिक पार्क'],['Fast Furious','फास्ट फ्युरियस'],
@@ -182,29 +182,30 @@ const CATS = {
     ['Jack Sparrow','ज्याक स्प्यारो'],['Deadpool','डेडपुल'],['Wednesday','वेन्सडे'],['Mission Impossible','मिसन इम्पोसिबल'],['Superman','सुपरम्यान'],['Interstellar','इन्टरस्टेलर']]},
   engnp: {i:'🗣️', n:['Nepali English','नेपाली अङ्ग्रेजी'], w:[
     ['Setting','सेटिङ'],['Source Force','सोर्स फोर्स'],['Chance','चान्स'],['Recharge','रिचार्ज'],['Data','डाटा'],['Hotspot','हटस्पट'],
-    ['Ncell','एनसेल'],['NTC','एनटीसी'],['Bike','बाइक'],['Helmet','हेल्मेट'],['Treat','ट्रिट'],['Party','पार्टी'],['Sorry','सरी'],['Full Tight','फुल टाइट'],
+    ['Ncell','एनसेल'],['NTC','एनटीसी'],['Bike','बाइक'],['Helmet','हेल्मेट'],['Treat','ट्रिट'],['Party','पार्टी'],
     ['Hostel','होस्टल'],['Rent','रेन्ट'],['Plus Two','प्लस टु'],['Bachelor','ब्याचलर'],['Exam','इक्जाम'],
     ['Cheating','चिटिङ'],['Bunk','बङ्क'],['Canteen','क्यान्टिन'],['Boyfriend','ब्वाइफ्रेन्ड'],['Girlfriend','गर्लफ्रेन्ड'],['Breakup','ब्रेकअप'],
-    ['Propose','प्रपोज'],['Senti','सेन्टी'],['Overtime','ओभरटाइम'],['Salary','स्यालरी'],['Bonus','बोनस'],['Fresh','फ्रेस']]},
+    ['Proposal','प्रपोजल'],['Overtime','ओभरटाइम'],['Salary','स्यालरी'],['Bonus','बोनस'],]},
   eng: {i:'🔤', n:['English Words','अङ्ग्रेजी शब्द'], w:[
     ['Umbrella','छाता'],['Elephant','हात्ती'],['Mirror','ऐना'],['Pillow','सिरानी'],['Toothbrush','दाँत माझ्ने ब्रस'],['Rainbow','इन्द्रेणी'],
     ['Airplane','हवाईजहाज'],['Hospital','अस्पताल'],['Library','पुस्तकालय'],['Volcano','ज्वालामुखी'],['Penguin','पेंगुइन'],['Pizza','पिज्जा'],
     ['Birthday','जन्मदिन'],['Wedding','बिहे'],['Ghost','भूत'],['Doctor','डाक्टर'],['Teacher','शिक्षक'],['Police','प्रहरी'],['Guitar','गितार'],
     ['Camera','क्यामेरा'],['Spider','माकुरो'],['Snake','सर्प'],['Monkey','बाँदर'],['Rocket','रकेट'],['Beach','समुद्री किनार'],['Jungle','जंगल'],
-    ['Pirate','समुद्री डाकु'],['Robot','रोबोट'],['Dinosaur','डाइनोसर'],['Ice Cream','आइसक्रिम'],['Chocolate','चकलेट'],['Swimming','पौडी'],
+    ['Pirate','समुद्री डाकु'],['Robot','रोबोट'],['Dinosaur','डाइनोसर'],['Ice Cream','आइसक्रिम'],['Chocolate','चकलेट'],['Pool','पुल'],
     ['Moon','चन्द्रमा'],['Fire','आगो']]}
 };
 // Close hint the imposter sees, keyed by romanized word (falls back to category only).
 const HINTS = {
   // meme
-  'Gajab':'Achamma pareko bela bhanne','Ke Garne':'Upaya nabhaeko bela','Babal':'Ekdam ramro / dangerous',
-  'Chhya!':'Ghin lageko awaj','Hait!':'Rishaune ek shabda','Lau':'Kasailai karkaap garda',
-  'Ambani':'Dherai kharcha garne lai taunt','Aura':'Lajjaspad kaam pachhi','Jhyau':'Bore bhaeko feel','Majja':'Ramailo feel',
-  'Nepali Time':'Dhilo pugne bani','Ekchhin':'Parkhaune shabda',
-  'Milaidinu':'Discount / help magne','Bihe':'Dashain ma sodhine prashna',
-  'Password':'Kasaiko ghar pugne bittikai','Kangal':'Mahina ko anta','Tension':'Dimag ma pir',
+  'Hawa Guff':'Jhuto thulo kura','Chamcha':'Neta ko pichhalagu','Jugaad':'Jasari ni milaune upaya','Nautanki':'Natak gareko jasto','Kulman':'Batti lyaune hero',
+  
+  
+  'Ambani':'Dherai kharcha garne lai taunt','Aura':'Lajjaspad kaam pachhi','Majja':'Ramailo feel',
+  'Nepali Time':'Dhilo pugne bani',
+  'Bihe':'Dashain ma sodhine prashna',
+  'Password':'Kasaiko ghar pugne bittikai','Tension':'Dimag ma pir',
   'Chuna':'Thagiyo',
-  'Sanchai':'Aadar sanga greeting','Thug Life':'Chasma khasne meme',
+  'Thug Life':'Chasma khasne meme',
   // celeb
   'Rajesh Hamal':'Long coat, Mahanayak','Mahanayak':'Sabai bhanda thulo hero','Dhurmus':'Comedy jodi, ghar banaidine','Suntali':'Comedy jodi ko mahila',
   'Madan Krishna':'MaHa jodi, harmonium','Hari Bansha':'MaHa jodi, sano kad','Magne Buda':'Budo comedy character',
@@ -217,9 +218,9 @@ const HINTS = {
   // genz
   'Nepo Kids':'Neta ka chhora chhori ko flex','Gen Z':'Bhadau 2082 ko sadak','Discord':'Gamer haru ko chat app',
   'One Piece':'Anime ko pirate flag','VPN':'Block bhaeko app chalauna',
-  'TikTok':'Chhoto video app','Reels':'Instagram ko video','Live':'Real time ma video','Seenzone':'Reply nagarne','Blue Tick':'Verified account',
-  'Rizz':'Patauna sakne kala','Brainrot':'Dherai scroll garda dimag','Sigma':'Eklai hidne male','NPC':'Game ko background character','Delulu':'Sapana ma bachne',
-  'Crush':'Mann parne manchhe','Situationship':'Relation ho ki haina','Hashtag':'# chinha','Viral':'Sabai le share gareko','Free Fire':'Mobile battle game',
+  'TikTok':'Chhoto video app','Reels':'Instagram ko video','Livestream':'Real time ma video','Seenzone':'Reply nagarne','Blue Tick':'Verified account',
+  'Rizz':'Patauna sakne kala','Brainrot':'Dherai scroll garda dimag','Sigma':'Eklai hidne male','NPC':'Game ko background character',
+  'Crush':'Mann parne manchhe','Situationship':'Relation ho ki haina','Hashtag':'# chinha','Free Fire':'Mobile battle game',
   'PUBG':'Chicken dinner game','Ludo':'Paasa phalne game','Zoom':'Covid ma online class','Story':'24 ghanta ko photo','Netflix':'Rato logo streaming app',
   'Chasma':'Balen ko signature','Rap':'Barz ko jhagada',
   // neta
@@ -256,7 +257,7 @@ const HINTS = {
   'Chappal':'Mamu ko hatiyar','Dhara':'Pani aaune thau','Kirana':'Chhimeki ko sano pasal','Udhaaro':'Paisa pachhi dinchhu','Bhauju':'Daju ko srimati',
   'Sasurali':'Srimati ko ghar','Relative':'Kati number aayo?','eSewa':'Hariyo wallet app','Khalti':'Baijani wallet app','Loksewa':'Sarkari jagir ko exam',
   'SEE':'Class 10 ko natija','IELTS':'Bidesh jana English test','Australia':'Kangaroo desh ma basobas','Korea':'Kam ko lagi EPS exam',
-  'Qatar':'Khadi ma kaam','Japan':'Sakura desh jana','Sarkari':'Bholi aaunu bhanne thau','Malpot':'Jagga ko kagaj office',
+  'Qatar':'Khadi ma kaam','Japan':'Sakura desh jana','Malpot':'Jagga ko kagaj office',
   'Buspark':'Gaadi chadne thulo thau','Khaldo':'Bato ma pokhari','Dhulo':'Kathmandu ko mask kina','Tuition':'School pachhi padhai',
   // trad
   'Dashain':'Tika ra jamara ko chad','Tihar':'Batti ra deusi ko chad','Teej':'Rato sari ra brata','Chhath':'Surya lai arghya','Holi':'Rang khelne chad',
@@ -282,10 +283,10 @@ const HINTS = {
   // hindi
   'Rasoda':'Serial ko kitchen meme','Binod':'Comment ma naam matra','Jethalal':'Gokuldham ko businessman','Babu Bhaiya':'Hera Pheri ko budo',
   
-  'Moye Moye':'Dukha ko viral gana','Bahut Hard':'Gully Boy ko line','Elvish':'Bigg Boss winner YouTuber','CarryMinati':'Roast garne Indian YouTuber',
+  'Moye Moye':'Dukha ko viral gana','Elvish':'Bigg Boss winner YouTuber','CarryMinati':'Roast garne Indian YouTuber',
   'Bhuvan Bam':'BB Ki Vines','Dhinchak Pooja':'Selfie maine le li','Thappad':'Pyaar se lagta hai','Gabbar':'Kitne aadmi the?',
-  'Mogambo':'Khush hune villain','Sindoor':'Ek chutki ko keemat','Karan Arjun':'Aama ko bharosa','All Is Well':'3 Idiots ko mantra',
-  'Pawri':'Pakistani viral girl','Wow':'Kapda bechne viral auntie','Bigg Boss':'Ghar ma band reality show','Kapil Sharma':'Hindi comedy show',
+  'Mogambo':'Khush hune villain','Sindoor':'Ek chutki ko keemat','Karan Arjun':'Aama ko bharosa',
+  'Pawri':'Pakistani viral girl','Bigg Boss':'Ghar ma band reality show','Kapil Sharma':'Hindi comedy show',
   'Taarak Mehta':'Gokuldham society serial','Jalwa':'Swag dekhaune line',
   'Dukh':'Khatam nahi hota meme',
   // bolly
@@ -302,7 +303,7 @@ const HINTS = {
   'Naatu Naatu':'Oscar jiteko dance','Rajinikanth':'Thalaiva, chasma ghumaune','Vijay':'Tamil superstar','Mahesh Babu':'Prince of Tollywood','NTR':'RRR ko Bheem',
   'Ram Charan':'RRR ko Ram','Rashmika':'National crush','Samantha':'Oo Antava gana ki heroine','Kantara':'Daiva naach film',
   'Salaar':'Prabhas ko action film','Jailer':'Rajini ko jail film','Chitti':'Rajini ko robot','Srivalli':'Pushpa ko maya','Oo Antava':'Pushpa ko item gana',
-  'Lungi':'Rajini lai tribute gana','Goldmines':'YouTube ma Hindi dub channel','Dubbed':'TV ma rati aaune film',
+  'Lungi':'Rajini lai tribute gana','Goldmines':'YouTube ma Hindi dub channel',
   'Slow Motion':'Hero aaune style',
   // holly
   'Avengers':'Superhero team','Ironman':'Suit lagaune billionaire','Spider-Man':'Jaal phyakne hero','Batman':'Chamero hero','Joker':'Hasne villain','Thanos':'Chutki le aadha',
@@ -314,18 +315,18 @@ const HINTS = {
   'Interstellar':'Space ra time film',
   // engnp
   'Setting':'Bhitra bata milaune','Source Force':'Chineko manchhe le kaam','Chance':'Mauka','Recharge':'Phone ma balance','Data':'Internet kinne','Hotspot':'Arkaiko internet share',
-  'Ncell':'Baijani SIM','NTC':'Sarkari SIM','Bike':'Dui pangre','Helmet':'Tauko ko suraksha','Treat':'Khuwaunu parchha aba','Party':'Ramailo jamghat','Sorry':'Maaf magne',
-  'Full Tight':'Dherai matiyeko','Hostel':'Ghar bahira basne','Rent':'Mahina ko bhada','Plus Two':'Class 11-12','Bachelor':'Plus two pachhi',
+  'Ncell':'Baijani SIM','NTC':'Sarkari SIM','Bike':'Dui pangre','Helmet':'Tauko ko suraksha','Treat':'Khuwaunu parchha aba','Party':'Ramailo jamghat',
+  'Hostel':'Ghar bahira basne','Rent':'Mahina ko bhada','Plus Two':'Class 11-12','Bachelor':'Plus two pachhi',
   'Exam':'Pariksha','Cheating':'Chorera lekhne','Bunk':'Class bhagne','Canteen':'College ko khaja ghar','Boyfriend':'Keti ko maya','Girlfriend':'Keta ko maya',
-  'Breakup':'Relation sakiyo','Propose':'I love you bhanne','Senti':'Bhawuk bhaeko','Overtime':'Thap samaya kaam','Salary':'Mahina ko talab','Bonus':'Dashain ma thap paisa',
-  'Fresh':'Nuhaera taja',
+  'Breakup':'Relation sakiyo','Proposal':'I love you bhanne','Overtime':'Thap samaya kaam','Salary':'Mahina ko talab','Bonus':'Dashain ma thap paisa',
+  
   // eng
   'Umbrella':'Pani parda ota','Elephant':'Lamo sud bhaeko','Mirror':'Aafno anuhar herne','Pillow':'Sutda tauko muni','Toothbrush':'Bihana dant safa','Rainbow':'Saat rang akash ma',
   'Airplane':'Akash ma udne gaadi','Hospital':'Birami jane thau','Library':'Kitab nai kitab','Volcano':'Aago ogalne pahad','Penguin':'Udna nasakne chara, hiun',
   'Pizza':'Italian gol khana','Birthday':'Cake katne din','Wedding':'Dulaha dulahi','Ghost':'Rati darauna aaune','Doctor':'Sui dine manchhe','Teacher':'Kakshya ma padhaune',
   'Police':'Seeti ra danda','Guitar':'Chha taar ko baja','Camera':'Photo khichne','Spider':'Aath khutta, jaal','Snake':'Khutta nabhaeko, susu','Monkey':'Rukh chadne, kera',
   'Rocket':'Antariksha jane','Beach':'Baluwa ra chhal','Jungle':'Bagh ra rukh','Pirate':'Samudra ko chor','Robot':'Machine manchhe','Dinosaur':'Lopa bhaeko thulo jiv',
-  'Ice Cream':'Chiso mitho','Chocolate':'Khairo mitho','Swimming':'Pani ma tairine','Moon':'Rati ko ujyalo','Fire':'Taato ra rato'
+  'Ice Cream':'Chiso mitho','Chocolate':'Khairo mitho','Pool':'Pani ma tairine thau','Moon':'Rati ko ujyalo','Fire':'Taato ra rato'
 };
 const DARES = [
   ['Rajesh Hamal ko style ma "Shankar hu ma Shankar" bhana','राजेश हमालको स्टाइलमा "शंकर हुँ म शंकर" भन'],
