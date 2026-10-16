@@ -1,6 +1,6 @@
 # Imposter Ko Ho? 🕵️ (इम्पोस्टर को हो?)
 
-Pass-and-play Nepali imposter party game for Android — ~1800 words across 7 categories: neta & chunab, food, sports, places, Bollywood, South movies, Hollywood. No word repeats until its whole category has been played. Close hint for the imposter (toggle), undercover mode, dares for the loser. Romanized Nepali + नेपाली (toggle on home screen).
+Pass-and-play Nepali imposter party game for Android — ~425 nouns, mostly one word, across 17 categories: meme dialogues, celebs & YouTubers, Gen Z & internet (Nepo Kids, Discord PM…), neta & chunab, films & serials, music, food, Nepali jindagi, traditional, sports, places, Hindi memes, Bollywood, South movies, Hollywood, Nepali English, English words. No word repeats until its whole category has been played. Close hint for the imposter (toggle), undercover mode, dares for the loser. Romanized Nepali + नेपाली (toggle on home screen).
 
 <p align="center"><a href="https://github.com/Suuwam/imposter-ko-ho/raw/main/imposter-ko-ho.apk"><img src="download.svg" alt="Download imposter-ko-ho.apk" width="380"></a></p>
 
